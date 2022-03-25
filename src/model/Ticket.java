@@ -45,6 +45,22 @@ public class Ticket implements Identifiable<Long> {
         this.hall = hall;
     }
 
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

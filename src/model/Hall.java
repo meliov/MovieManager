@@ -8,25 +8,25 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class Hall implements Identifiable<Long> {
-    private Long id;
+public class Hall {//implements Identifiable<Long> {
+    //private Long id;
     private HallName hallName;
     private int rows;
     private int cols;
     private int capacity;
     private boolean[][] hall;
     private LocalDateTime projectionTime;
-    private Map<DayOfWeek, Map< LocalDateTime,Movie>> movieProgram;//ako tr da se vijda v koq zala e prosto vijdame dali filma sushtestvuva tukai printiram
+    private Map<DayOfWeek, Map< LocalDateTime,Movie>> movieProgram;
 
 
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
-    @Override
-    public Long getId() {
-        return this.id;
-    }
+//    @Override
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//    @Override
+//    public Long getId() {
+//        return this.id;
+//    }
 
     public HallName getHallName() {
         return hallName;
@@ -100,7 +100,7 @@ public class Hall implements Identifiable<Long> {
     @Override
     public String toString() {
         return "Hall{" +
-                "id=" + id +
+               // "id=" + id +
                 ", hallName=" + hallName +
                 ", rows=" + rows +
                 ", cols=" + cols +
