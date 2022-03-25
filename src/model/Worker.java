@@ -3,6 +3,8 @@ package model;
 import java.util.List;
 import java.util.Objects;
 
+import static model.Role.WORKER;
+
 public class Worker extends User{
    private List<Movie> updatedMovies;
    private List<Snack> updatedSnacks;
@@ -23,6 +25,10 @@ public class Worker extends User{
         this.updatedSnacks = updatedSnacks;
     }
 
+    public Worker(String firstName, String lastName, String username, String password, String email) {
+        super(firstName, lastName, username, password, email, WORKER);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -40,8 +46,9 @@ public class Worker extends User{
     @Override
     public String toString() {
         return "Worker{" +
-                "updatedMovies=" + updatedMovies +
+                super.toString() +
+                ", updatedMovies=" + updatedMovies +
                 ", updatedSnacks=" + updatedSnacks +
-                '}';
+                "} " ;
     }
 }

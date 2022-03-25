@@ -17,6 +17,18 @@ public abstract class User implements Identifiable<Long> {
     private LocalDate registrationDate;
     private UserStatus status;
 
+    public User(String firstName, String lastName, String username,
+                String password, String email, Role role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+        this.registrationDate = LocalDate.now();
+        this.status = UserStatus.ACTIVE;
+    }
+
     @Override
     public void setId(Long id) {
         this.id = id;
@@ -107,7 +119,7 @@ public abstract class User implements Identifiable<Long> {
     public String toString() {
         return "User{" +
                 "role=" + role +
-                "id=" + id +
+                ", id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +

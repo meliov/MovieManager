@@ -3,10 +3,16 @@ package model;
 import java.util.List;
 import java.util.Objects;
 
+import static model.Role.ADMIN;
+
 public class Admin extends User{
     private List<Movie> moviesModerated;
     private List<User> usersModerated;
     private List<Snack> snacksModerated;
+
+    public Admin(String firstName, String lastName, String username, String password, String email) {
+        super(firstName, lastName, username, password, email, ADMIN);
+    }
 
     public List<Movie> getMoviesModerated() {
         return moviesModerated;
@@ -49,9 +55,10 @@ public class Admin extends User{
     @Override
     public String toString() {
         return "Admin{" +
-                "moviesModerated=" + moviesModerated +
+                 super.toString() +
+                ", moviesModerated=" + moviesModerated +
                 ", usersModerated=" + usersModerated +
                 ", snacksModerated=" + snacksModerated +
-                '}';
+                "} ";
     }
 }

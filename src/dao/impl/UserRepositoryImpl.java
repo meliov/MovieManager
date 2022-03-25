@@ -1,10 +1,9 @@
 package dao.impl;
 
-import dao.RegisteredUserRepository;
-import model.RegisteredUser;
+import dao.UserRepository;
 import model.User;
 
-public class UserRepositoryImpl extends AbstractPersistableRepository<Long, RegisteredUser> implements RegisteredUserRepository {
+ class UserRepositoryImpl extends AbstractPersistableRepository<Long, User> implements UserRepository {
 
     public UserRepositoryImpl(IdGenerator<Long> idGenerator) {
         super(idGenerator);
@@ -21,7 +20,7 @@ public class UserRepositoryImpl extends AbstractPersistableRepository<Long, Regi
     }
 
     @Override
-    public RegisteredUser findByUsername(String username) {
+    public User findByUsername(String username) {
         return null;
     }
 }
