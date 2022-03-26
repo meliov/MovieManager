@@ -1,10 +1,7 @@
 package dao.impl;
 
 import dao.DaoFactory;
-import dao.repository.MovieRepository;
-import dao.repository.ReviewRepository;
-import dao.repository.UserRepository;
-import dao.repository.Repository;
+import dao.repository.*;
 
 public class DaoFactoryImpl implements DaoFactory {
     @Override
@@ -20,6 +17,11 @@ public class DaoFactoryImpl implements DaoFactory {
     @Override
     public ReviewRepository createReviewRepository() {
         return new ReviewRepositoryImpl(new ReviewRepository.LongIdGenerator());
+    }
+
+    @Override
+    public ProgramRepository createProgramRepository() {
+        return new ProgramRepositoryImpl(new Repository.LongIdGenerator());
     }
 
 }

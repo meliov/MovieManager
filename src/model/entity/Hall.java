@@ -1,12 +1,11 @@
 package model.entity;
 
 import dao.Identifiable;
-import model.DayOfWeek;
 import model.HallName;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
 
 public class Hall implements Identifiable<Long> {
@@ -17,7 +16,8 @@ public class Hall implements Identifiable<Long> {
     private int capacity;
     private boolean[][] hall;
     private LocalDateTime projectionTime;
-    private Map<DayOfWeek, Map< LocalDateTime,Movie>> movieProgram;
+    private List<DailyProgram> movieProgram;
+
 
 
     @Override
@@ -77,11 +77,12 @@ public class Hall implements Identifiable<Long> {
         this.projectionTime = projectionTime;
     }
 
-    public Map<DayOfWeek, Map<LocalDateTime, Movie>> getMovieProgram() {
+
+    public List<DailyProgram> getMovieProgram() {
         return movieProgram;
     }
 
-    public void setMovieProgram(Map<DayOfWeek, Map<LocalDateTime, Movie>> movieProgram) {
+    public void setMovieProgram(List<DailyProgram> movieProgram) {
         this.movieProgram = movieProgram;
     }
 
