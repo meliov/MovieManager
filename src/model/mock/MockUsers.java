@@ -1,11 +1,10 @@
 package model.mock;
 
-import model.Admin;
-import model.RegisteredUser;
-import model.User;
-import model.Worker;
+import model.entity.Admin;
+import model.entity.RegisteredUser;
+import model.entity.User;
+import model.entity.Worker;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

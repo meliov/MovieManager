@@ -1,6 +1,7 @@
-package model;
+package model.entity;
 
 import dao.Identifiable;
+import model.Genre;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -14,7 +15,26 @@ public class Movie implements Identifiable<Long> {
     private Genre genre;
     private String description;
     private LocalDate releaseDate;
-    private List<Review> reviews;
+    //private List<Review> reviews;
+
+    public Movie(int length, double price, String movieName, Genre genre, String description, LocalDate releaseDate) {
+        this.length = length;
+        this.price = price;
+        this.movieName = movieName;
+        this.genre = genre;
+        this.description = description;
+        this.releaseDate = releaseDate;
+    }
+
+    public Movie(int length, double price, String movieName, Genre genre, String description, LocalDate releaseDate, List<Review> reviews) {
+        this.length = length;
+        this.price = price;
+        this.movieName = movieName;
+        this.genre = genre;
+        this.description = description;
+        this.releaseDate = releaseDate;
+        //this.reviews = reviews;
+    }
 
     @Override
     public void setId(Long id) {
@@ -73,13 +93,13 @@ public class Movie implements Identifiable<Long> {
         this.releaseDate = releaseDate;
     }
 
-    public List<Review> getReviews() {
-        return reviews;
-    }
-
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
+//    public List<Review> getReviews() {
+//        return reviews;
+//    }
+//
+//    public void setReviews(List<Review> reviews) {
+//        this.reviews = reviews;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -104,7 +124,7 @@ public class Movie implements Identifiable<Long> {
                 ", genre=" + genre +
                 ", description='" + description + '\'' +
                 ", releaseDate=" + releaseDate +
-                ", reviews=" + reviews +
+               // ", reviews=" + reviews +
                 '}';
     }
 }

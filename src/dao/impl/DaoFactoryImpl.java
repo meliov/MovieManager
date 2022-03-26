@@ -1,12 +1,19 @@
 package dao.impl;
 
 import dao.DaoFactory;
-import dao.UserRepository;
-import dao.Repository;
+import dao.repository.MovieRepository;
+import dao.repository.UserRepository;
+import dao.repository.Repository;
 
 public class DaoFactoryImpl implements DaoFactory {
     @Override
-    public UserRepository createRegisteredUserRepository() {
-        return new UserRepositoryImpl(new Repository.LongIdGenerator());
+    public UserRepository createUserRepository() {
+        return new UserRepositoryImpl(new UserRepository.LongIdGenerator());
     }
+
+    @Override
+    public MovieRepository createMovieRepository() {
+        return new MovieRepositoryImpl(new MovieRepository.LongIdGenerator());
+    }
+
 }

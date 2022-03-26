@@ -1,5 +1,6 @@
-package dao;
+package dao.repository;
 
+import dao.Identifiable;
 import dao.exception.EntityAlreadyExistsException;
 import dao.exception.NonExistingEntityException;
 
@@ -25,7 +26,7 @@ public interface Repository<K, V extends Identifiable<K>>{
      * implementation of IdGenerator for Long type id
      */
     class LongIdGenerator implements IdGenerator<Long>{
-        private static Long id = 0L;
+        private  Long id = 0L;
 
         @Override
         public Long getNextId() {
@@ -51,29 +52,28 @@ public interface Repository<K, V extends Identifiable<K>>{
      * @param entity to be created
      * @return the created entity
      */
-    V create(V entity, String entityName) throws  EntityAlreadyExistsException;
+    V create(V entity) throws  EntityAlreadyExistsException;
 
     /**
      *
      * @param entity to be updated
      * @return updated entity
      */
-    V update(V entity, String entityName) throws NonExistingEntityException;
+    V update(V entity) throws NonExistingEntityException;
 
     /**
      *
      * finds all values by given id
      * @param id id of entity
      */
-    V findById(K id, String entityName) throws NonExistingEntityException;
+    V findById(K id) throws NonExistingEntityException;
 
     /**
      *
      * @param id id of entity we want to delete
-     * @param entityName
      * @return the deleted entity
      */
-    V deleteById(K id, String entityName) throws NonExistingEntityException;
+    V deleteById(K id) throws NonExistingEntityException;
 
     /**
      * finds the count of all objects in an entity

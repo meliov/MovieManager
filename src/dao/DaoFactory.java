@@ -1,5 +1,9 @@
 package dao;
 
+import dao.repository.MovieRepository;
+import dao.repository.UserRepository;
+
 public interface DaoFactory {
-    UserRepository createRegisteredUserRepository();
+    UserRepository createUserRepository();
+    MovieRepository createMovieRepository();
 }

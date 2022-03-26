@@ -1,6 +1,6 @@
-package dao;
+package dao.repository;
 
-import model.Ticket;
+import model.entity.Ticket;
 
 public interface TicketRepository extends Repository<Long, Ticket>{
 }

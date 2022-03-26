@@ -1,6 +1,7 @@
-package model;
+package model.entity;
 
 import dao.Identifiable;
+import model.SnackSize;
 
 import java.util.Objects;
 

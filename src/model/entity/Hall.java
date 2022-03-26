@@ -1,15 +1,16 @@
-package model;
+package model.entity;
 
 import dao.Identifiable;
+import model.DayOfWeek;
+import model.HallName;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class Hall {//implements Identifiable<Long> {
-    //private Long id;
+public class Hall implements Identifiable<Long> {
+    private Long id;
     private HallName hallName;
     private int rows;
     private int cols;
@@ -19,14 +20,14 @@ public class Hall {//implements Identifiable<Long> {
     private Map<DayOfWeek, Map< LocalDateTime,Movie>> movieProgram;
 
 
-//    @Override
-//    public void setId(Long id) {
-//        this.id = id;
-//    }
-//    @Override
-//    public Long getId() {
-//        return this.id;
-//    }
+    @Override
+    public void setId(Long id) {
+        this.id = id;
+    }
+    @Override
+    public Long getId() {
+        return this.id;
+    }
 
     public HallName getHallName() {
         return hallName;

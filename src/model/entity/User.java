@@ -1,9 +1,10 @@
-package model;
+package model.entity;
 
 import dao.Identifiable;
+import model.Role;
+import model.UserStatus;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Objects;
 
 public abstract class User implements Identifiable<Long> {
