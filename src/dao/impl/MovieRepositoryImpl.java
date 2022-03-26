@@ -50,19 +50,5 @@ class MovieRepositoryImpl extends AbstractRepository<Long, Movie> implements Mov
         return movies;
     }
 
-    @Override
-    public Collection<Movie> sortByReleaseDate() {
-        return entityMap.values()
-                .stream()
-                .sorted(Comparator.comparing(Movie::getReleaseDate))
-                .collect(Collectors.toList());
-    }
 
-    @Override
-    public Collection<Movie> sortByPrice() {
-        return entityMap.values()
-                .stream()
-                .sorted(Comparator.comparing(Movie::getPrice))
-                .collect(Collectors.toList());
-    }
 }

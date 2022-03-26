@@ -9,6 +9,10 @@ public class RegisteredUser extends User{
     private List<Movie> watchedMovies;
 //    private List<Review> reviews;
 
+    public RegisteredUser(Long id) {
+        super(id);
+    }
+
     public RegisteredUser(String firstName, String lastName, String username, String password, String email) {
         super(firstName, lastName, username, password, email, REGISTERED_USER);
     }

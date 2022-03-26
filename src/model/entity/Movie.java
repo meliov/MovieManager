@@ -36,6 +36,10 @@ public class Movie implements Identifiable<Long> {
         //this.reviews = reviews;
     }
 
+    public Movie(Long id) {
+        this.id = id;
+    }
+
     @Override
     public void setId(Long id) {
         this.id = id;

@@ -1,16 +1,22 @@
 import dao.DaoFactory;
 import dao.exception.NonExistingEntityException;
 import dao.repository.MovieRepository;
+import dao.repository.ReviewRepository;
 import dao.repository.UserRepository;
 import dao.exception.EntityAlreadyExistsException;
 import dao.impl.DaoFactoryImpl;
 import model.entity.Movie;
+import model.entity.RegisteredUser;
+import model.entity.Review;
 import model.entity.User;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Comparator;
 
 import static model.Genre.FANTASY;
 import static model.mock.MockMovies.MOCK_MOVIES;
+import static model.mock.MockReviews.MOCK_REVIEWS;
 import static model.mock.MockUsers.MOCK_USERS;
 
 public class TestingRepository {
@@ -47,6 +53,8 @@ public class TestingRepository {
             e.printStackTrace();
         }
         //movies repo
+
+        System.out.println();
         System.out.println();
         System.out.println("Movies\tMovies\tMovies\tMovies\tMovies");
         System.out.println();
@@ -81,12 +89,66 @@ public class TestingRepository {
             e.printStackTrace();
         }
         System.out.println("Movies sorted by release date: ");
-        for(Movie m: movieRepository.sortByReleaseDate()){
+        for(Movie m: movieRepository.findAllSorted(new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return o1.getReleaseDate().compareTo(o2.getReleaseDate());
+            }
+        })){
             System.out.println(m);
         }
         System.out.println("Movies sorted by price: ");
-        for(Movie m: movieRepository.sortByPrice()){
+        for(Movie m: movieRepository.findAllSorted(new Comparator<Movie>() {
+            @Override
+            public int compare(Movie o1, Movie o2) {
+                return Double.compare(o1.getPrice(),o2.getPrice());
+
+            }
+        })){
             System.out.println(m);
+        }
+
+        //reviews
+        System.out.println();
+        System.out.println();
+        System.out.println("Review\tReview\tReview\tReview\tReview");
+        System.out.println();
+
+        ReviewRepository reviewRepository = daoFactory.createReviewRepository();
+        for(Review r : MOCK_REVIEWS){
+            try {
+                reviewRepository.create(r);
+            } catch (EntityAlreadyExistsException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Reviews");
+        for(Review r: reviewRepository.findAll()){
+            System.out.println(r);
+        }
+        System.out.println("Find all REviews by user");
+        try {
+            for(Review r: reviewRepository.findByUser(new RegisteredUser(1L))){
+                System.out.println(r);
+            }
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Find all REviews by movie");
+        try {
+            for(Review r: reviewRepository.findByMovie(new Movie(2L))){
+                System.out.println(r);
+            }
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Find all REviews by date");
+        try {
+            for(Review r: reviewRepository.findByDate(LocalDate.of(2022, 3, 26))){
+                System.out.println(r);
+            }
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
         }
     }
 }

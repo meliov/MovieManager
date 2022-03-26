@@ -11,6 +11,5 @@ public interface MovieRepository extends Repository<Long, Movie>{
     Movie findByMovieName(String movieName) throws NonExistingEntityException;
     Collection<Movie> findByPrice(double moviePrice) throws NonExistingEntityException;
     Collection<Movie> findByGenre(Genre genre) throws NonExistingEntityException;
-    Collection<Movie> sortByReleaseDate();
-    Collection<Movie> sortByPrice();
+
 }

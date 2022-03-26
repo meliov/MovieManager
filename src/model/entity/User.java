@@ -30,6 +30,10 @@ public abstract class User implements Identifiable<Long> {
         this.status = UserStatus.ACTIVE;
     }
 
+    public User(Long id) {
+        this.id = id;
+    }
+
     @Override
     public void setId(Long id) {
         this.id = id;

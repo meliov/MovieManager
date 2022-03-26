@@ -8,9 +8,23 @@ import java.util.Objects;
 public class Review implements Identifiable<Long> {
     private Long id;
     private String content;
-    private User postingUser;
+    private RegisteredUser postingUser;
     private Movie movie;
-    private LocalDate postingTime;
+    private LocalDate postingDate;
+
+    public Review(String content, RegisteredUser postingUser, Movie movie) {
+        this.content = content;
+        this.postingUser = postingUser;
+        this.movie = movie;
+        postingDate = LocalDate.now();
+    }
+
+    public Review(String content, RegisteredUser postingUser, Movie movie, LocalDate postingTime) {
+        this.content = content;
+        this.postingUser = postingUser;
+        this.movie = movie;
+        this.postingDate = postingTime;
+    }
 
     @Override
     public void setId(Long id) {
@@ -33,7 +47,7 @@ public class Review implements Identifiable<Long> {
         return postingUser;
     }
 
-    public void setPostingUser(User postingUser) {
+    public void setPostingUser(RegisteredUser postingUser) {
         this.postingUser = postingUser;
     }
 
@@ -45,12 +59,12 @@ public class Review implements Identifiable<Long> {
         this.movie = movie;
     }
 
-    public LocalDate getPostingTime() {
-        return postingTime;
+    public LocalDate getPostingDate() {
+        return postingDate;
     }
 
-    public void setPostingTime(LocalDate postingTime) {
-        this.postingTime = postingTime;
+    public void setPostingDate(LocalDate postingDate) {
+        this.postingDate = postingDate;
     }
 
     @Override
@@ -73,7 +87,7 @@ public class Review implements Identifiable<Long> {
                 ", content='" + content + '\'' +
                 ", postingUser=" + postingUser +
                 ", movie=" + movie +
-                ", postingTime=" + postingTime +
+                ", postingTime=" + postingDate +
                 '}';
     }
 }
