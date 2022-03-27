@@ -9,8 +9,8 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-class MovieRepositoryImpl extends AbstractRepository<Long, Movie> implements MovieRepository {
-    public MovieRepositoryImpl(IdGenerator<Long> idGenerator) {
+class MovieRepositoryImpl extends AbstractRepository<Integer, Movie> implements MovieRepository {
+    public MovieRepositoryImpl(IdGenerator<Integer> idGenerator) {
         super(idGenerator);
     }
 

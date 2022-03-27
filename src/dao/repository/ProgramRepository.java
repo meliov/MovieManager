@@ -6,6 +6,6 @@ import model.entity.DailyProgram;
 
 import java.util.Collection;
 
-public interface ProgramRepository extends Repository<Long, DailyProgram>{
+public interface ProgramRepository extends Repository<Integer, DailyProgram>{
     DailyProgram findByDayOfWeek(DayOfWeek dayOfWeek) throws NonExistingEntityException;
 }

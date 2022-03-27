@@ -9,7 +9,7 @@ public class RegisteredUser extends User{
     private List<Movie> watchedMovies;
 //    private List<Review> reviews;
 
-    public RegisteredUser(Long id) {
+    public RegisteredUser(Integer id) {
         super(id);
     }
 

@@ -25,11 +25,11 @@ public interface Repository<K, V extends Identifiable<K>>{
     /**
      * implementation of IdGenerator for Long type id
      */
-    class LongIdGenerator implements IdGenerator<Long>{
-        private  Long id = 0L;
+    class IntegerIdGenerator implements IdGenerator<Integer>{
+        private  Integer id = 0;
 
         @Override
-        public Long getNextId() {
+        public Integer getNextId() {
             return ++id;
         }
     }

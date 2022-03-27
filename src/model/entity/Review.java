@@ -5,8 +5,8 @@ import dao.Identifiable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Review implements Identifiable<Long> {
-    private Long id;
+public class Review implements Identifiable<Integer> {
+    private Integer id;
     private String content;
     private RegisteredUser postingUser;
     private Movie movie;
@@ -27,11 +27,11 @@ public class Review implements Identifiable<Long> {
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     @Override
-    public Long getId(){
+    public Integer getId(){
         return id;
     }
 

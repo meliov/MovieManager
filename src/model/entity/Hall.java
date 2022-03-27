@@ -1,40 +1,28 @@
 package model.entity;
 
 import dao.Identifiable;
-import model.HallName;
 
-import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Hall implements Identifiable<Long> {
-    private Long id;
-    private HallName hallName;
+public class Hall implements Identifiable<Integer> {
+    private Integer id;
     private int rows;
     private int cols;
     private int capacity;
     private boolean[][] hall;
-    private LocalDateTime projectionTime;
     private List<DailyProgram> movieProgram;
 
 
 
     @Override
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     @Override
-    public Long getId() {
+    public Integer getId() {
         return this.id;
-    }
-
-    public HallName getHallName() {
-        return hallName;
-    }
-
-    public void setHallName(HallName hallName) {
-        this.hallName = hallName;
     }
 
     public int getRows() {
@@ -69,13 +57,6 @@ public class Hall implements Identifiable<Long> {
         this.hall = hall;
     }
 
-    public LocalDateTime getProjectionTime() {
-        return projectionTime;
-    }
-
-    public void setProjectionTime(LocalDateTime projectionTime) {
-        this.projectionTime = projectionTime;
-    }
 
 
     public List<DailyProgram> getMovieProgram() {
@@ -91,24 +72,22 @@ public class Hall implements Identifiable<Long> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Hall hall = (Hall) o;
-        return hallName == hall.hallName;
+        return Objects.equals(id, hall.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hallName);
+        return Objects.hash(id);
     }
 
     @Override
     public String toString() {
         return "Hall{" +
-               // "id=" + id +
-                ", hallName=" + hallName +
+                "id=" + id +
                 ", rows=" + rows +
                 ", cols=" + cols +
                 ", capacity=" + capacity +
                 ", hall=" + Arrays.toString(hall) +
-                ", projectionTime=" + projectionTime +
                 ", movieProgram=" + movieProgram +
                 '}';
     }

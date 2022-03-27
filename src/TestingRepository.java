@@ -129,7 +129,7 @@ public class TestingRepository {
         }
         System.out.println("Find all REviews by user");
         try {
-            for(Review r: reviewRepository.findByUser(new RegisteredUser(1L))){
+            for(Review r: reviewRepository.findByUser(new RegisteredUser(1))){
                 System.out.println(r);
             }
         } catch (NonExistingEntityException e) {
@@ -137,7 +137,7 @@ public class TestingRepository {
         }
         System.out.println("Find all REviews by movie");
         try {
-            for(Review r: reviewRepository.findByMovie(new Movie(2L))){
+            for(Review r: reviewRepository.findByMovie(new Movie(2))){
                 System.out.println(r);
             }
         } catch (NonExistingEntityException e) {

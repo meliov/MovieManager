@@ -8,8 +8,8 @@ import model.entity.DailyProgram;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class ProgramRepositoryImpl extends AbstractRepository<Long, DailyProgram> implements ProgramRepository {
-    public ProgramRepositoryImpl(IdGenerator<Long> idGenerator) {
+public class ProgramRepositoryImpl extends AbstractRepository<Integer, DailyProgram> implements ProgramRepository {
+    public ProgramRepositoryImpl(IdGenerator<Integer> idGenerator) {
         super(idGenerator);
     }
 

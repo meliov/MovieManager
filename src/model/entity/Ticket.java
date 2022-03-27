@@ -4,8 +4,8 @@ import dao.Identifiable;
 
 import java.util.Objects;
 
-public class Ticket implements Identifiable<Long> {
-    private Long id;
+public class Ticket implements Identifiable<Integer> {
+    private Integer id;
     private Movie movie;
     private RegisteredUser user;
     private Hall hall;
@@ -13,11 +13,11 @@ public class Ticket implements Identifiable<Long> {
     private int col;
 
     @Override
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     @Override
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -77,6 +77,6 @@ public class Ticket implements Identifiable<Long> {
     @Override
     public String toString() {
        return String.format("Movie: %s, User: %s, Hall: %s, Row: %s, Column: %s",
-                movie.getMovieName(), user.getUsername(), hall.getHallName(), row, col);
+                movie.getMovieName(), user.getUsername(), hall.getId(), row, col);
     }
 }

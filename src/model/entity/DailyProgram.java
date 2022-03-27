@@ -3,28 +3,26 @@ package model.entity;
 import dao.Identifiable;
 import model.DayOfWeek;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class DailyProgram implements Identifiable<Long> {
-    private Long id;
+public class DailyProgram implements Identifiable<Integer> {//implements Identifiable<Long> {
+   private Integer id;
     private DayOfWeek dayOfWeek;
-    private List<Map<LocalTime, Movie>> projections;
+    private List<Map<String, Movie>> projections;
 
-    public DailyProgram(DayOfWeek dayOfWeek, List<Map<LocalTime, Movie>> projections) {
+    public DailyProgram(DayOfWeek dayOfWeek, List<Map<String, Movie>> projections) {
         this.dayOfWeek = dayOfWeek;
         this.projections = projections;
     }
 
     @Override
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
     @Override
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -36,11 +34,11 @@ public class DailyProgram implements Identifiable<Long> {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public List<Map<LocalTime, Movie>> getProjections() {
+    public List<Map<String, Movie>> getProjections() {
         return projections;
     }
 
-    public void setProjections(List<Map<LocalTime, Movie>> projections) {
+    public void setProjections(List<Map<String, Movie>> projections) {
         this.projections = projections;
     }
 
@@ -49,19 +47,22 @@ public class DailyProgram implements Identifiable<Long> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         DailyProgram program = (DailyProgram) o;
-        return Objects.equals(id, program.id) && dayOfWeek == program.dayOfWeek;
+        return
+                Objects.equals(id, program.id) &&
+                dayOfWeek == program.dayOfWeek;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, dayOfWeek);
+        //return Objects.hash(id, dayOfWeek);
+        return Objects.hash( dayOfWeek);
     }
 
     @Override
     public String
     toString() {
         return "Program{" +
-                "id=" + id +
+              //  "id=" + id +
                 ", dayOfWeek=" + dayOfWeek +
                 ", projections=" + projections +
                 '}';

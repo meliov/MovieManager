@@ -7,9 +7,9 @@ import model.entity.User;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-class UserRepositoryImpl extends AbstractRepository<Long, User> implements UserRepository {
+class UserRepositoryImpl extends AbstractRepository<Integer, User> implements UserRepository {
 
-    public UserRepositoryImpl(IdGenerator<Long> idGenerator) {
+    public UserRepositoryImpl(IdGenerator<Integer> idGenerator) {
         super(idGenerator);
     }
 

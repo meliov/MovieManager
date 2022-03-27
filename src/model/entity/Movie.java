@@ -7,8 +7,8 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-public class Movie implements Identifiable<Long> {
-    private Long id;
+public class Movie implements Identifiable<Integer> {
+    private Integer id;
     private int length;
     private double price;
     private String movieName;
@@ -36,16 +36,16 @@ public class Movie implements Identifiable<Long> {
         //this.reviews = reviews;
     }
 
-    public Movie(Long id) {
+    public Movie(Integer id) {
         this.id = id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     @Override
-    public Long getId() {
+    public Integer getId() {
         return this.id;
     }
 

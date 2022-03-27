@@ -11,8 +11,8 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-public class ReviewRepositoryImpl extends AbstractRepository<Long, Review> implements ReviewRepository {
-    public ReviewRepositoryImpl(IdGenerator<Long> idGenerator) {
+public class ReviewRepositoryImpl extends AbstractRepository<Integer, Review> implements ReviewRepository {
+    public ReviewRepositoryImpl(IdGenerator<Integer> idGenerator) {
         super(idGenerator);
     }
 

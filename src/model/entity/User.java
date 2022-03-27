@@ -7,8 +7,8 @@ import model.UserStatus;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public abstract class User implements Identifiable<Long> {
-    private Long id;
+public abstract class User implements Identifiable<Integer> {
+    private Integer id;
     private String firstName;
     private String lastName;
     private String username;
@@ -30,16 +30,16 @@ public abstract class User implements Identifiable<Long> {
         this.status = UserStatus.ACTIVE;
     }
 
-    public User(Long id) {
+    public User(Integer id) {
         this.id = id;
     }
 
     @Override
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
     @Override
-    public Long getId(){
+    public Integer getId(){
         return this.id;
     }
 
