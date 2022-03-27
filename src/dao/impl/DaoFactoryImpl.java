@@ -34,4 +34,9 @@ public class DaoFactoryImpl implements DaoFactory {
         return new HallRepositoryImpl(new Repository.IntegerIdGenerator());
     }
 
+    @Override
+    public TicketRepository createTicketRepository() {
+        return new TicketRepositoryImpl( new Repository.IntegerIdGenerator());
+    }
+
 }

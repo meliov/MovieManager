@@ -14,7 +14,6 @@ public class Hall implements Identifiable<Integer> {
     private boolean[][] hall;
     private DailyProgram[] movieProgram;
 
-    //hall , tickets, registeredUser, admin
 
     public Hall(int rows, int seats, DailyProgram[] movieProgram) {
         this.rows = rows;

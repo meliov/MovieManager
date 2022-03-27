@@ -2,6 +2,7 @@ package dao.impl;
 
 import dao.exception.NonExistingEntityException;
 import dao.repository.ProjectionRepository;
+import model.DayOfWeek;
 import model.entity.Movie;
 import model.entity.Projection;
 
@@ -36,4 +37,5 @@ public class ProjectionRepositoryImpl extends AbstractRepository<Integer, Projec
         }
         return movies;
     }
+
 }

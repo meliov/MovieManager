@@ -4,6 +4,7 @@ import dao.exception.NonExistingEntityException;
 import dao.repository.ProgramRepository;
 import model.DayOfWeek;
 import model.entity.DailyProgram;
+import model.entity.Projection;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -24,4 +25,5 @@ public class ProgramRepositoryImpl extends AbstractRepository<Integer, DailyProg
         }
         return movie.get();
     }
+
 }

@@ -7,6 +7,15 @@ import static model.Role.REGISTERED_USER;
 public class RegisteredUser extends User{
     private List<Movie> favouriteMovies;
     private List<Movie> watchedMovies;
+    private List<Ticket> orderedTickets;
+
+    public List<Ticket> getOrderedTickets() {
+        return orderedTickets;
+    }
+
+    public void setOrderedTickets(List<Ticket> orderedTickets) {
+        this.orderedTickets = orderedTickets;
+    }
 //    private List<Review> reviews;
 
     public RegisteredUser(Integer id) {

@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
+import static model.DayOfWeek.MONDAY;
 import static model.DayOfWeek.TUESDAY;
 import static model.Genre.FANTASY;
 import static model.mock.MockHalls.MOCK_HALLS;
@@ -18,6 +20,7 @@ import static model.mock.MockMovies.MOCK_MOVIES;
 import static model.mock.MockProgram.MOCK_PROGRAM;
 import static model.mock.MockProjections.MOCK_PROJECTIONS;
 import static model.mock.MockReviews.MOCK_REVIEWS;
+import static model.mock.MockTickets.MOCK_TICKETS;
 import static model.mock.MockUsers.MOCK_USERS;
 
 public class TestingRepository {
@@ -199,6 +202,7 @@ public class TestingRepository {
             e.printStackTrace();
         }
 
+
         // halls
         System.out.println();
         System.out.println();
@@ -217,11 +221,81 @@ public class TestingRepository {
         System.out.println("Printing halls: ");
         for(Hall h: hallRepository.findAll()){
             System.out.printf("For hall with id = %d:%n", h.getId());
+//            var b = Arrays.stream(h.getMovieProgram())
+//                    .map(e -> e.getProjections()
+//                            .stream()
+//                            .sorted(Comparator.comparing(Projection::getHour)))
+//
+
+//            Arrays.stream(h.getMovieProgram()).forEach(d -> {
+//                System.out.printf("%n%s -> ", d.getDayOfWeek());
+//                d.getProjections().forEach(p -> System.out.printf("|%s:%s|",p.getHour(),p.getMovie().getMovieName()));
+//                System.out.println();
+//            });
             Arrays.stream(h.getMovieProgram()).forEach(d -> {
                 System.out.printf("%n%s -> ", d.getDayOfWeek());
-                d.getProjections().forEach(p -> System.out.printf("|%s:%s|",p.getHour(),p.getMovie().getMovieName()));
+                d.getProjections().stream().sorted(Comparator.comparing(Projection::getHour))
+                        .forEach(p -> System.out.printf("|%s : %s|",p.getHour(),p.getMovie().getMovieName()));
                 System.out.println();
             });
         }
+        System.out.println();
+        System.out.println();
+        System.out.println("find by day and hour: MONDAY, 17:00");
+        try {
+            System.out.printf("%n -> %s\n",hallRepository.findProjectionByDayAndHour(MONDAY, "17:00"));
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
+        //tickets
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("Tickets");
+        System.out.println();
+
+        TicketRepository ticketRepository = daoFactory.createTicketRepository();
+        for(Ticket t: MOCK_TICKETS){
+            try {
+                ticketRepository.create(t);
+            } catch (EntityAlreadyExistsException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Printing tickets");
+        System.out.println();
+        for(Ticket t: ticketRepository.findAll()){
+            System.out.println(t);
+        }
+        System.out.println();
+        System.out.println("find ticket by user");
+
+        try {
+            for(Ticket t: ticketRepository.findTicketsByUser(userRepository.findById(1))){
+                System.out.println(t);
+            }
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+        System.out.println("find ticket by movie");
+
+        try {
+            for(Ticket t: ticketRepository.findTicketsByMovie(movieRepository.findById(3))){
+                System.out.println(t);
+            }
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
+
+        //admins
+
+
+
+
+
+
+        //registered users
     }
 }
