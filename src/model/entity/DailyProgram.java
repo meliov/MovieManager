@@ -10,9 +10,9 @@ import java.util.Objects;
 public class DailyProgram implements Identifiable<Integer> {//implements Identifiable<Long> {
    private Integer id;
     private DayOfWeek dayOfWeek;
-    private List<Map<String, Movie>> projections;
+    private List<Projection> projections;
 
-    public DailyProgram(DayOfWeek dayOfWeek, List<Map<String, Movie>> projections) {
+    public DailyProgram(DayOfWeek dayOfWeek, List<Projection> projections) {
         this.dayOfWeek = dayOfWeek;
         this.projections = projections;
     }
@@ -34,11 +34,11 @@ public class DailyProgram implements Identifiable<Integer> {//implements Identif
         this.dayOfWeek = dayOfWeek;
     }
 
-    public List<Map<String, Movie>> getProjections() {
+    public List<Projection> getProjections() {
         return projections;
     }
 
-    public void setProjections(List<Map<String, Movie>> projections) {
+    public void setProjections(List<Projection> projections) {
         this.projections = projections;
     }
 

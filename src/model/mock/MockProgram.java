@@ -2,6 +2,7 @@ package model.mock;
 
 import model.entity.DailyProgram;
 import model.entity.Movie;
+import model.entity.Projection;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,20 +18,18 @@ import static model.Genre.FANTASY;
 import static model.Genre.THRILLER;
 import static model.ProjectionsTime.*;
 import static model.mock.MockMovies.MOCK_MOVIES;
+import static model.mock.MockProjections.MOCK_PROJECTIONS;
 
 public class MockProgram {
-    private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
 
     public static final List<DailyProgram> MOCK_PROGRAM = Arrays.asList(
            new DailyProgram(MONDAY,Arrays.asList(
-                   Map.of(THREE, MOCK_MOVIES.get(0)),
-                    Map.of(FIVE, MOCK_MOVIES.get(1)),
-                   Map.of(EIGHT, MOCK_MOVIES.get(2))
+                      MOCK_PROJECTIONS.get(0), MOCK_PROJECTIONS.get(1), MOCK_PROJECTIONS.get(2)
                    )),
                    new DailyProgram(TUESDAY,Arrays.asList(
-                           Map.of(THREE, MOCK_MOVIES.get(2)),
-                           Map.of(FIVE, MOCK_MOVIES.get(1)),
-                           Map.of(EIGHT, MOCK_MOVIES.get(0))
+                           MOCK_PROJECTIONS.get(3), MOCK_PROJECTIONS.get(4), MOCK_PROJECTIONS.get(5)
                    ))
+
+
     );
 }

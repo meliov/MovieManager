@@ -1,9 +1,6 @@
 import dao.DaoFactory;
 import dao.exception.NonExistingEntityException;
-import dao.repository.MovieRepository;
-import dao.repository.ProgramRepository;
-import dao.repository.ReviewRepository;
-import dao.repository.UserRepository;
+import dao.repository.*;
 import dao.exception.EntityAlreadyExistsException;
 import dao.impl.DaoFactoryImpl;
 import model.DayOfWeek;
@@ -17,6 +14,7 @@ import static model.DayOfWeek.TUESDAY;
 import static model.Genre.FANTASY;
 import static model.mock.MockMovies.MOCK_MOVIES;
 import static model.mock.MockProgram.MOCK_PROGRAM;
+import static model.mock.MockProjections.MOCK_PROJECTIONS;
 import static model.mock.MockReviews.MOCK_REVIEWS;
 import static model.mock.MockUsers.MOCK_USERS;
 
@@ -151,6 +149,24 @@ public class TestingRepository {
         } catch (NonExistingEntityException e) {
             e.printStackTrace();
         }
+        //projections
+        ProjectionRepository projectionRepository = daoFactory.createProjectionRepository();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("PROJECTIONS");
+        System.out.println();
+        for(Projection p: MOCK_PROJECTIONS){
+            try {
+                projectionRepository.create(p);
+            } catch (EntityAlreadyExistsException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Printing projections");
+        for(Projection p: projectionRepository.findAll()){
+            System.out.println(p);
+        }
         //daily program
         System.out.println();
         System.out.println();
@@ -171,12 +187,12 @@ public class TestingRepository {
 
         for(DailyProgram d: programRepository.findAll()){
             System.out.printf("%s-%n", d.getDayOfWeek());
-            d.getProjections().forEach(m -> m.forEach((k,v) -> System.out.printf(" %s - %s\n", k, v.getMovieName())));
+            d.getProjections().forEach(System.out::println);
         }
         System.out.println("Printing program for Tuesday");
         System.out.println();
         try {
-            programRepository.findByDayOfWeek(TUESDAY).getProjections().forEach(m -> m.forEach((k,v) -> System.out.printf(" %s - %s\n", k, v.getMovieName())));
+            programRepository.findByDayOfWeek(TUESDAY).getProjections().forEach(System.out::println);
         } catch (NonExistingEntityException e) {
             e.printStackTrace();
         }
