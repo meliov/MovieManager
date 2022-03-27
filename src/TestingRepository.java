@@ -8,10 +8,12 @@ import model.entity.*;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.Comparator;
 
 import static model.DayOfWeek.TUESDAY;
 import static model.Genre.FANTASY;
+import static model.mock.MockHalls.MOCK_HALLS;
 import static model.mock.MockMovies.MOCK_MOVIES;
 import static model.mock.MockProgram.MOCK_PROGRAM;
 import static model.mock.MockProjections.MOCK_PROJECTIONS;
@@ -183,7 +185,7 @@ public class TestingRepository {
             }
         }
 
-        System.out.println("Printing program for al days");
+        System.out.println("Printing program for all days");
 
         for(DailyProgram d: programRepository.findAll()){
             System.out.printf("%s-%n", d.getDayOfWeek());
@@ -197,5 +199,29 @@ public class TestingRepository {
             e.printStackTrace();
         }
 
+        // halls
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("Hall");
+        System.out.println();
+
+        HallRepository hallRepository = daoFactory.createHallRepository();
+        for(Hall h: MOCK_HALLS ){
+            try {
+                hallRepository.create(h);
+            } catch (EntityAlreadyExistsException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println("Printing halls: ");
+        for(Hall h: hallRepository.findAll()){
+            System.out.printf("For hall with id = %d:%n", h.getId());
+            Arrays.stream(h.getMovieProgram()).forEach(d -> {
+                System.out.printf("%n%s -> ", d.getDayOfWeek());
+                d.getProjections().forEach(p -> System.out.printf("|%s:%s|",p.getHour(),p.getMovie().getMovieName()));
+                System.out.println();
+            });
+        }
     }
 }

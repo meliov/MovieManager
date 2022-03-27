@@ -12,8 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import static model.DayOfWeek.MONDAY;
-import static model.DayOfWeek.TUESDAY;
+import static model.DayOfWeek.*;
 import static model.Genre.FANTASY;
 import static model.Genre.THRILLER;
 import static model.ProjectionsTime.*;
@@ -28,7 +27,22 @@ public class MockProgram {
                    )),
                    new DailyProgram(TUESDAY,Arrays.asList(
                            MOCK_PROJECTIONS.get(3), MOCK_PROJECTIONS.get(4), MOCK_PROJECTIONS.get(5)
-                   ))
+                   )),
+                    new DailyProgram(WEDNESDAY,Arrays.asList(
+                            MOCK_PROJECTIONS.get(6), MOCK_PROJECTIONS.get(7), MOCK_PROJECTIONS.get(8)
+                    )),
+                    new DailyProgram(THURSDAY,Arrays.asList(
+                            MOCK_PROJECTIONS.get(3), MOCK_PROJECTIONS.get(4), MOCK_PROJECTIONS.get(5)
+                    )),
+                    new DailyProgram(FRIDAY,Arrays.asList(
+                            MOCK_PROJECTIONS.get(6), MOCK_PROJECTIONS.get(7), MOCK_PROJECTIONS.get(8)
+                    )),
+                    new DailyProgram(SATURDAY,Arrays.asList(
+                            MOCK_PROJECTIONS.get(3), MOCK_PROJECTIONS.get(4), MOCK_PROJECTIONS.get(5)
+                    )),
+                    new DailyProgram(SUNDAY,Arrays.asList(
+                            MOCK_PROJECTIONS.get(8), MOCK_PROJECTIONS.get(2), MOCK_PROJECTIONS.get(4)
+                    ))
 
 
     );

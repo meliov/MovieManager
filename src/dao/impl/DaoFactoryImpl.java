@@ -26,7 +26,12 @@ public class DaoFactoryImpl implements DaoFactory {
 
     @Override
     public ProjectionRepository createProjectionRepository() {
-        return new ProjectionRepositoryImpl(new Repository.IntegerIdGenerator());
+        return new ProjectionRepositoryImpl(new ProjectionRepository.IntegerIdGenerator());
+    }
+
+    @Override
+    public HallRepository createHallRepository() {
+        return new HallRepositoryImpl(new Repository.IntegerIdGenerator());
     }
 
 }

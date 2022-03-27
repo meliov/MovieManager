@@ -85,8 +85,8 @@ public class Review implements Identifiable<Integer> {
         return "Review{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
-                ", postingUser=" + postingUser +
-                ", movie=" + movie +
+                ", postingUser=" + postingUser.getUsername() +
+                ", movie=" + movie.getMovieName() +
                 ", postingTime=" + postingDate +
                 '}';
     }

@@ -57,7 +57,7 @@ public class Projection implements Identifiable<Integer> {
     public String toString() {
         return "Projection{" +
                 "id=" + id +
-                ", date='" + hour + '\'' +
+                ", hour ='" + hour + '\'' +
                 ", movie=" + movie.getMovieName() +
                 '}';
     }

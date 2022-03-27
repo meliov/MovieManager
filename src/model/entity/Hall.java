@@ -9,12 +9,20 @@ import java.util.Objects;
 public class Hall implements Identifiable<Integer> {
     private Integer id;
     private int rows;
-    private int cols;
+    private int seats;
     private int capacity;
     private boolean[][] hall;
-    private List<DailyProgram> movieProgram;
+    private DailyProgram[] movieProgram;
 
+    //hall , tickets, registeredUser, admin
 
+    public Hall(int rows, int seats, DailyProgram[] movieProgram) {
+        this.rows = rows;
+        this.seats = seats;
+        this.capacity = rows*seats;
+        this.movieProgram = movieProgram;
+        hall = new boolean[rows][seats];
+    }
 
     @Override
     public void setId(Integer id) {
@@ -33,12 +41,12 @@ public class Hall implements Identifiable<Integer> {
         this.rows = rows;
     }
 
-    public int getCols() {
-        return cols;
+    public int getSeats() {
+        return seats;
     }
 
-    public void setCols(int cols) {
-        this.cols = cols;
+    public void setSeats(int seats) {
+        this.seats = seats;
     }
 
     public int getCapacity() {
@@ -58,12 +66,11 @@ public class Hall implements Identifiable<Integer> {
     }
 
 
-
-    public List<DailyProgram> getMovieProgram() {
+    public DailyProgram[] getMovieProgram() {
         return movieProgram;
     }
 
-    public void setMovieProgram(List<DailyProgram> movieProgram) {
+    public void setMovieProgram(DailyProgram[] movieProgram) {
         this.movieProgram = movieProgram;
     }
 
@@ -84,11 +91,11 @@ public class Hall implements Identifiable<Integer> {
     public String toString() {
         return "Hall{" +
                 "id=" + id +
-                ", rows=" + rows +
-                ", cols=" + cols +
+               // ", rows=" + rows +
+               // ", cols=" + seats +
                 ", capacity=" + capacity +
-                ", hall=" + Arrays.toString(hall) +
-                ", movieProgram=" + movieProgram +
+               // ", hall=" + Arrays.toString(hall) +
+                ", movieProgram=" + Arrays.toString(movieProgram) +
                 '}';
     }
 }

@@ -8,4 +8,5 @@ public interface DaoFactory {
     ReviewRepository createReviewRepository();
     ProgramRepository createProgramRepository();
     ProjectionRepository createProjectionRepository();
+    HallRepository createHallRepository();
 }

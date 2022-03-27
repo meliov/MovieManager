@@ -15,7 +15,6 @@ public class Movie implements Identifiable<Integer> {
     private Genre genre;
     private String description;
     private LocalDate releaseDate;
-    //private List<Review> reviews;
 
     public Movie(int length, double price, String movieName, Genre genre, String description, LocalDate releaseDate) {
         this.length = length;
@@ -33,7 +32,6 @@ public class Movie implements Identifiable<Integer> {
         this.genre = genre;
         this.description = description;
         this.releaseDate = releaseDate;
-        //this.reviews = reviews;
     }
 
     public Movie(Integer id) {
@@ -97,13 +95,6 @@ public class Movie implements Identifiable<Integer> {
         this.releaseDate = releaseDate;
     }
 
-//    public List<Review> getReviews() {
-//        return reviews;
-//    }
-//
-//    public void setReviews(List<Review> reviews) {
-//        this.reviews = reviews;
-//    }
 
     @Override
     public boolean equals(Object o) {
