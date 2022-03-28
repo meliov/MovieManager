@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
  class TicketRepositoryImpl extends AbstractRepository<Integer, Ticket> implements TicketRepository {
     public TicketRepositoryImpl(IdGenerator idGenerator) {
-        super(idGenerator);
+        super(idGenerator, "ticket");
     }
 
     @Override

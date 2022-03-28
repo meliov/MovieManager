@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
  class ReviewRepositoryImpl extends AbstractRepository<Integer, Review> implements ReviewRepository {
     public ReviewRepositoryImpl(IdGenerator<Integer> idGenerator) {
-        super(idGenerator);
+        super(idGenerator, "review");
     }
 
     @Override

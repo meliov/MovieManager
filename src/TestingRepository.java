@@ -303,7 +303,11 @@ public class TestingRepository {
 //            }
 //        }
 
-
+        try {
+            ticketRepository.findById(8);
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
         //registered users
     }
 }

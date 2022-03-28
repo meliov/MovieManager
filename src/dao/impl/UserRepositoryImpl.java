@@ -2,15 +2,16 @@ package dao.impl;
 
 import dao.exception.NonExistingEntityException;
 import dao.repository.UserRepository;
-import model.entity.User;
+import model.entity.*;
 
+import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 class UserRepositoryImpl extends AbstractRepository<Integer, User> implements UserRepository {
 
     public UserRepositoryImpl(IdGenerator<Integer> idGenerator) {
-        super(idGenerator);
+        super(idGenerator, "user");
     }
 
 
@@ -37,4 +38,5 @@ class UserRepositoryImpl extends AbstractRepository<Integer, User> implements Us
          }
          return user.get();
      }
+
  }

@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
  class ProjectionRepositoryImpl extends AbstractRepository<Integer, Projection> implements ProjectionRepository {
     public ProjectionRepositoryImpl(IdGenerator<Integer> idGenerator) {
-        super(idGenerator);
+        super(idGenerator, "projection");
     }
 
     @Override

@@ -8,6 +8,6 @@ import model.entity.User;
 import java.util.Collection;
 
 public interface AdminRepository extends UserRepository{
-    Collection<Admin> findAdminByModeratedMovie(Movie movie) throws NonExistingEntityException;
-    Collection<Admin> findAdminByModeratedUser(User user) throws NonExistingEntityException;
+    public Collection<Admin> findAdminByModeratedMovie(Movie movie) throws NonExistingEntityException;
+    public Collection<Admin> findAdminByModeratedUser(User user) throws NonExistingEntityException;
 }

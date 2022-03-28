@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 
  class HallRepositoryImpl extends AbstractRepository<Integer, Hall> implements HallRepository {
     public HallRepositoryImpl(IdGenerator<Integer> idGenerator) {
-        super(idGenerator);
+        super(idGenerator, "hall");
     }
 
     @Override

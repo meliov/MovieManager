@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 
  class ProgramRepositoryImpl extends AbstractRepository<Integer, DailyProgram> implements ProgramRepository {
     public ProgramRepositoryImpl(IdGenerator<Integer> idGenerator) {
-        super(idGenerator);
+        super(idGenerator, "program");
     }
 
     @Override
