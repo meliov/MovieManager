@@ -16,9 +16,7 @@ import java.util.*;
         this.entityName = string;
     }
 
-     public static void main(String[] args) {
 
-     }
      public void print(V entity){
          System.out.println(entity.getClass());
      }

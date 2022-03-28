@@ -296,18 +296,20 @@ public class TestingRepository {
         System.out.println();
         System.out.println("Admins");
         System.out.println();
-       // System.out.println("is instance of");
-//        for(User u: userRepository.findAll()){
-//            if(u instanceof Admin){
-//                System.out.println(u);
-//            }
-//        }
-
-        try {
-            ticketRepository.findById(8);
-        } catch (NonExistingEntityException e) {
-            e.printStackTrace();
+        System.out.println("is instance of");
+        for(User u: userRepository.findAll()){
+            if(u instanceof Admin){
+                System.out.println(u);
+            }
         }
+
+//        try {
+//            ticketRepository.findById(8);
+//        } catch (NonExistingEntityException e) {
+//            e.printStackTrace();
+//        }
         //registered users
+
+
     }
 }

@@ -1,5 +1,7 @@
 package model.entity;
 
+import model.Role;
+
 import java.util.List;
 
 import static model.Role.REGISTERED_USER;
@@ -24,6 +26,11 @@ public class RegisteredUser extends User{
 
     public RegisteredUser(String firstName, String lastName, String username, String password, String email) {
         super(firstName, lastName, username, password, email, REGISTERED_USER);
+    }
+
+    public RegisteredUser(String firstName, String lastName, String username, String password, String email, List<Movie> watchedMovies) {
+        super(firstName, lastName, username, password, email, REGISTERED_USER);
+        this.watchedMovies = watchedMovies;
     }
 
     public List<Movie> getFavouriteMovies() {
