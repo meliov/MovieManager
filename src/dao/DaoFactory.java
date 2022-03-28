@@ -10,4 +10,6 @@ public interface DaoFactory {
     ProjectionRepository createProjectionRepository();
     HallRepository createHallRepository();
     TicketRepository createTicketRepository();
+    AdminRepository createAdminRepository();
+    RegisteredUserRepository createRegisteredUserRepository();
 }

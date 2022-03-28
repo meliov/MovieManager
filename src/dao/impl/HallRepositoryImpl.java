@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class HallRepositoryImpl extends AbstractRepository<Integer, Hall> implements HallRepository {
+ class HallRepositoryImpl extends AbstractRepository<Integer, Hall> implements HallRepository {
     public HallRepositoryImpl(IdGenerator<Integer> idGenerator) {
         super(idGenerator);
     }

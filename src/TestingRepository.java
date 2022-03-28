@@ -290,10 +290,18 @@ public class TestingRepository {
         }
 
         //admins
-
-
-
-
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println("Admins");
+        System.out.println();
+       // System.out.println("is instance of");
+//        for(User u: userRepository.findAll()){
+//            if(u instanceof Admin){
+//                System.out.println(u);
+//            }
+//        }
 
 
         //registered users

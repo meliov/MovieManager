@@ -7,7 +7,7 @@ import dao.exception.NonExistingEntityException;
 
 import java.util.*;
 
-public abstract class AbstractRepository<K, V extends Identifiable<K>> implements Repository<K, V > {
+ abstract class AbstractRepository<K, V extends Identifiable<K>> implements Repository<K, V > {
     protected Map<K, V> entityMap = new LinkedHashMap<>();
     private IdGenerator<K> idGenerator;
     public AbstractRepository(IdGenerator<K> idGenerator ){

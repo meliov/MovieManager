@@ -16,7 +16,7 @@ public class RegisteredUser extends User{
     public void setOrderedTickets(List<Ticket> orderedTickets) {
         this.orderedTickets = orderedTickets;
     }
-//    private List<Review> reviews;
+//    private List<Review> reviews; //po dobre v survisa na userite da se vzeme repoto na ticket, za da ne se promenq na tolkova mnogo mesta
 
     public RegisteredUser(Integer id) {
         super(id);

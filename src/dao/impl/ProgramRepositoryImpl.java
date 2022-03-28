@@ -9,7 +9,7 @@ import model.entity.Projection;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class ProgramRepositoryImpl extends AbstractRepository<Integer, DailyProgram> implements ProgramRepository {
+ class ProgramRepositoryImpl extends AbstractRepository<Integer, DailyProgram> implements ProgramRepository {
     public ProgramRepositoryImpl(IdGenerator<Integer> idGenerator) {
         super(idGenerator);
     }

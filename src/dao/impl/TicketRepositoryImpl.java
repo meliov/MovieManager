@@ -7,7 +7,7 @@ import model.entity.*;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class TicketRepositoryImpl extends AbstractRepository<Integer, Ticket> implements TicketRepository {
+ class TicketRepositoryImpl extends AbstractRepository<Integer, Ticket> implements TicketRepository {
     public TicketRepositoryImpl(IdGenerator idGenerator) {
         super(idGenerator);
     }

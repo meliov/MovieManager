@@ -39,4 +39,14 @@ public class DaoFactoryImpl implements DaoFactory {
         return new TicketRepositoryImpl( new Repository.IntegerIdGenerator());
     }
 
+    @Override
+    public AdminRepository createAdminRepository() {
+        return new AdminRepositoryImpls(new Repository.IntegerIdGenerator());
+    }
+
+    @Override
+    public RegisteredUserRepository createRegisteredUserRepository() {
+        return new RegisteredUseRepositoryImpl(new Repository.IntegerIdGenerator());
+    }
+
 }
