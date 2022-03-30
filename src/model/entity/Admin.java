@@ -8,6 +8,20 @@ import static model.Role.ADMIN;
 public class Admin extends User{
     private List<Movie> moviesModerated;
     private List<User> usersModerated;
+    private List<DailyProgram> programsModerated;
+    private List<Hall> hallsModerated;
+    private List<Review> reviewsModerated;
+    private List<Projection> projectionsModerated;
+    private List<Ticket> ticketsModerated;
+
+    public List<DailyProgram> getProgramsModerated() {
+        return programsModerated;
+    }
+
+    public void setProgramsModerated(List<DailyProgram> programsModerated) {
+        this.programsModerated = programsModerated;
+    }
+
     private List<Snack> snacksModerated;
 
     public Admin(String firstName, String lastName, String username, String password, String email) {
@@ -32,6 +46,38 @@ public class Admin extends User{
 
     public List<Snack> getSnacksModerated() {
         return snacksModerated;
+    }
+
+    public List<Hall> getHallsModerated() {
+        return hallsModerated;
+    }
+
+    public void setHallsModerated(List<Hall> hallsModerated) {
+        this.hallsModerated = hallsModerated;
+    }
+
+    public List<Review> getReviewsModerated() {
+        return reviewsModerated;
+    }
+
+    public void setReviewsModerated(List<Review> reviewsModerated) {
+        this.reviewsModerated = reviewsModerated;
+    }
+
+    public List<Projection> getProjectionsModerated() {
+        return projectionsModerated;
+    }
+
+    public void setProjectionsModerated(List<Projection> projectionsModerated) {
+        this.projectionsModerated = projectionsModerated;
+    }
+
+    public List<Ticket> getTicketsModerated() {
+        return ticketsModerated;
+    }
+
+    public void setTicketsModerated(List<Ticket> ticketsModerated) {
+        this.ticketsModerated = ticketsModerated;
     }
 
     public void setSnacksModerated(List<Snack> snacksModerated) {

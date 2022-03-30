@@ -2,9 +2,7 @@ package dao.impl;
 
 import dao.exception.NonExistingEntityException;
 import dao.repository.AdminRepository;
-import model.entity.Admin;
-import model.entity.Movie;
-import model.entity.User;
+import model.entity.*;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -38,6 +36,79 @@ public class AdminRepositoryImpls extends UserRepositoryImpl implements AdminRep
                 .collect(Collectors.toList());
         if (admins.isEmpty()){
             throw new NonExistingEntityException(user +" is not moderated by any admin. Admin not found.");
+        }
+        return admins;
+    }
+
+    @Override
+    public Collection<Admin> findAdminByModeratedTicket(Ticket ticket) throws NonExistingEntityException {
+
+        var admins =  entityMap.values()
+                .stream()
+                .filter(e -> e instanceof Admin)
+                .map(Admin.class::cast)
+                .filter(e ->  e.getTicketsModerated().contains(ticket))
+                .collect(Collectors.toList());
+        if (admins.isEmpty()){
+            throw new NonExistingEntityException("Ticket:"+ ticket.getId()+ " of user: " +ticket.getUser().getUsername()
+                    +" is not moderated by any admin. Admin not found.");
+        }
+        return admins;
+    }
+
+    @Override
+    public Collection<Admin> findAdminByModeratedDailyProgram(DailyProgram dailyProgram) throws NonExistingEntityException {
+        var admins =  entityMap.values()
+                .stream()
+                .filter(e -> e instanceof Admin)
+                .map(Admin.class::cast)
+                .filter(e ->  e.getProgramsModerated().contains(dailyProgram))
+                .collect(Collectors.toList());
+        if (admins.isEmpty()){
+            throw new NonExistingEntityException(dailyProgram.getId() + " is not moderated by any admin. Admin not found.");
+        }
+        return admins;
+    }
+
+    @Override
+    public Collection<Admin> findAdminByModeratedProjection(Projection projection) throws NonExistingEntityException {
+        var admins =  entityMap.values()
+                .stream()
+                .filter(e -> e instanceof Admin)
+                .map(Admin.class::cast)
+                .filter(e ->  e.getProjectionsModerated().contains(projection))
+                .collect(Collectors.toList());
+        if (admins.isEmpty()){
+            throw new NonExistingEntityException(projection.getId() + " is not moderated by any admin. Admin not found.");
+        }
+        return admins;
+    }
+
+    @Override
+    public Collection<Admin> findAdminByModeratedHall(Hall hall) throws NonExistingEntityException {
+        var admins =  entityMap.values()
+                .stream()
+                .filter(e -> e instanceof Admin)
+                .map(Admin.class::cast)
+                .filter(e ->  e.getHallsModerated().contains(hall))
+                .collect(Collectors.toList());
+        if (admins.isEmpty()){
+            throw new NonExistingEntityException(hall.getId() + " is not moderated by any admin. Admin not found.");
+        }
+        return admins;
+    }
+
+    @Override
+    public Collection<Admin> findAdminByModeratedReview(Review review) throws NonExistingEntityException {
+        var admins =  entityMap.values()
+                .stream()
+                .filter(e -> e instanceof Admin)
+                .map(Admin.class::cast)
+                .filter(e ->  e.getReviewsModerated().contains(review))
+                .collect(Collectors.toList());
+        if (admins.isEmpty()){
+            throw new NonExistingEntityException(review.getId() + "of user: "+ review.getPostingUser().getUsername()
+                    +" is not moderated by any admin. Admin not found.");
         }
         return admins;
     }
