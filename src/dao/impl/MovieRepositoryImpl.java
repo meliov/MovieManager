@@ -50,5 +50,29 @@ class MovieRepositoryImpl extends AbstractRepository<Integer, Movie> implements 
         return movies;
     }
 
+    @Override
+    public Collection<Movie> findByDirector(String director) throws NonExistingEntityException {
+        var movies = entityMap.values()
+                .stream()
+                .filter(e -> e.getDirectorName().equals(director))
+                .collect(Collectors.toList());
+        if(movies.isEmpty()){
+            throw new NonExistingEntityException("There are no movies  from director -> " +  director+ " .");
+        }
+        return movies;
+    }
+
+    @Override
+    public Collection<Movie> findByStudio(String studio) throws NonExistingEntityException {
+        var movies = entityMap.values()
+                .stream()
+                .filter(e -> e.getStudioName().equals(studio))
+                .collect(Collectors.toList());
+        if(movies.isEmpty()){
+            throw new NonExistingEntityException("There are no movies  from studio ->" +  studio+ " .");
+        }
+        return movies;
+    }
+
 
 }

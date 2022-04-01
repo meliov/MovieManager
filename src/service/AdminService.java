@@ -2,6 +2,7 @@ package service;
 
 import dao.exception.EntityAlreadyExistsException;
 import dao.exception.InvalidEntityDataException;
+import dao.exception.NonExistingEntityException;
 import dao.repository.UserRepository;
 import model.entity.*;
 
@@ -10,9 +11,9 @@ public interface AdminService  {
     DailyProgram addDailyProgram(Admin admin,DailyProgram dailyProgram);
     DailyProgram deleteDailyProgram(Admin admin,DailyProgram dailyProgram);
     DailyProgram updateDailyProgram(Admin admin,DailyProgram dailyProgram);
-    User updateUser(Admin admin, User registeredUser);
+    User updateUser(Admin admin, User registeredUser) throws InvalidEntityDataException, NonExistingEntityException;
     User addUser(Admin admin, User registeredUser) throws InvalidEntityDataException, EntityAlreadyExistsException;
-    User deleteUser(Admin admin, User registeredUser);
+    User deleteUser(Admin admin, User registeredUser) throws NonExistingEntityException;
     Hall addHall(Admin admin,Hall hall);
     Hall deleteHall(Admin admin,Hall hall);
     Hall updateHall(Admin admin,Hall hall);
@@ -25,7 +26,7 @@ public interface AdminService  {
     Review updateReview(Admin admin,Review review);
     Review deleteReview(Admin admin,Review review);
     Review addReview(Admin admin,Review review);
-    Movie addMovie(Admin admin,Movie movie);
-    Movie updateMovie(Admin admin,Movie movie);
+    Movie addMovie(Admin admin,Movie movie) throws EntityAlreadyExistsException;
+    Movie updateMovie(Admin admin,Movie movie) throws NonExistingEntityException;
     Movie deleteMovie(Admin admin,Movie movie);
 }

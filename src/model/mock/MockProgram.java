@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -22,27 +23,27 @@ import static model.mock.MockProjections.MOCK_PROJECTIONS;
 public class MockProgram {
 
     public static final List<DailyProgram> MOCK_PROGRAM = Arrays.asList(
-           new DailyProgram(MONDAY,Arrays.asList(
+           new DailyProgram(MONDAY,new HashSet<>(Arrays.asList(
                       MOCK_PROJECTIONS.get(0), MOCK_PROJECTIONS.get(1), MOCK_PROJECTIONS.get(2)
-                   )),
-                   new DailyProgram(TUESDAY,Arrays.asList(
+                   ))),
+                   new DailyProgram(TUESDAY,new HashSet<>(Arrays.asList(
                            MOCK_PROJECTIONS.get(3), MOCK_PROJECTIONS.get(4), MOCK_PROJECTIONS.get(5)
-                   )),
-                    new DailyProgram(WEDNESDAY,Arrays.asList(
+                   ))),
+                    new DailyProgram(WEDNESDAY,new HashSet<>(Arrays.asList(
                             MOCK_PROJECTIONS.get(6), MOCK_PROJECTIONS.get(7), MOCK_PROJECTIONS.get(8)
-                    )),
-                    new DailyProgram(THURSDAY,Arrays.asList(
+                    ))),
+                    new DailyProgram(THURSDAY,new HashSet<>(Arrays.asList(
                             MOCK_PROJECTIONS.get(3), MOCK_PROJECTIONS.get(4), MOCK_PROJECTIONS.get(5)
-                    )),
-                    new DailyProgram(FRIDAY,Arrays.asList(
+                    ))),
+                    new DailyProgram(FRIDAY,new HashSet<>(Arrays.asList(
                             MOCK_PROJECTIONS.get(6), MOCK_PROJECTIONS.get(7), MOCK_PROJECTIONS.get(8)
-                    )),
-                    new DailyProgram(SATURDAY,Arrays.asList(
+                    ))),
+                    new DailyProgram(SATURDAY,new HashSet<>(Arrays.asList(
                             MOCK_PROJECTIONS.get(3), MOCK_PROJECTIONS.get(4), MOCK_PROJECTIONS.get(5)
-                    )),
-                    new DailyProgram(SUNDAY,Arrays.asList(
+                    ))),
+                    new DailyProgram(SUNDAY,new HashSet<>(Arrays.asList(
                             MOCK_PROJECTIONS.get(8), MOCK_PROJECTIONS.get(2), MOCK_PROJECTIONS.get(4)
-                    ))
+                    )))
 
 
     );

@@ -2,10 +2,7 @@ package dao.impl;
 
 import dao.exception.NonExistingEntityException;
 import dao.repository.RegisteredUserRepository;
-import model.entity.Admin;
-import model.entity.Movie;
-import model.entity.RegisteredUser;
-import model.entity.Ticket;
+import model.entity.*;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
@@ -53,6 +50,20 @@ class RegisteredUseRepositoryImpl extends UserRepositoryImpl implements Register
                 .collect(Collectors.toList());
         if (users.isEmpty()){
             throw new NonExistingEntityException(ticket +" is not ordered by any user. User not found.");
+        }
+        return users;
+    }
+
+    @Override
+    public Collection<RegisteredUser> finUsersByReview(Review review) throws NonExistingEntityException {
+        var users =  entityMap.values()
+                .stream()
+                .filter(e -> e instanceof RegisteredUser)
+                .map(RegisteredUser.class::cast)
+                .filter(e ->  e.getReviews().contains(review))
+                .collect(Collectors.toList());
+        if (users.isEmpty()){
+            throw new NonExistingEntityException("Review about "+review.getMovie().getMovieName() +" is not left by any user. User not found.");
         }
         return users;
     }

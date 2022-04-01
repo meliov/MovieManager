@@ -8,21 +8,33 @@ import model.entity.User;
 import java.util.ArrayList;
 import java.util.List;
 
-import static util.Constants.MAX_LENGTH;
-import static util.Constants.MIN_LENGTH;
+import static util.Constants.*;
+import static util.Regex.*;
 
 public class UserValidator extends EntityValidator<Integer,User> {
-    List<ConstraintViolation> violations = new ArrayList<>();
 
     @Override
     public void validate(User user) throws ConstraintViolationException {
-        if(user.getUsername().length() < MIN_LENGTH || user.getUsername().length() > MAX_LENGTH){
+        List<ConstraintViolation> violations = new ArrayList<>();
+        if(Regex.regexValidation(user.getUsername(), USER_NAMES_REGEX)){
             violations.add(new ConstraintViolation(user.getClass().getName(),
-                    "username", user.getUsername(), "Users username must be between " + MIN_LENGTH +" and " + MAX_LENGTH+"." ));
+                    "username", user.getUsername(), "Users username must be between " + NAME_MIN_LENGTH +" and " + NAME_MAX_LENGTH +"." ));
         }
-        if(user.getFirstName().length() < MIN_LENGTH || user.getFirstName().length()> MAX_LENGTH){
+        if(Regex.regexValidation(user.getFirstName(),USER_FIRST_LAST_NAME_REGEX)){
             violations.add(new ConstraintViolation(user.getClass().getName(),
-                    "first name", user.getFirstName(), "Users username must be between " + MIN_LENGTH +" and " + MAX_LENGTH+"." ));
+                    "first name", user.getFirstName(), "Users first name must be between " + NAME_MIN_LENGTH +" and " + NAME_MAX_LENGTH +"." ));
+        }
+        if(Regex.regexValidation(user.getLastName(),USER_FIRST_LAST_NAME_REGEX)){
+            violations.add(new ConstraintViolation(user.getClass().getName(),
+                    "last name", user.getFirstName(), "Users last name must be between " + NAME_MIN_LENGTH +" and " + NAME_MAX_LENGTH +"." ));
+        }
+        if(Regex.regexValidation(user.getPassword(),USER_PASS_REGEX)){
+            violations.add(new ConstraintViolation(user.getClass().getName(),
+                    "password", user.getFirstName(), "Users password must be between " + PASS_MIN_LENGTH +" and " + PASS_MAX_LENGTH +"." ));
+        }
+        if(Regex.regexValidation(user.getEmail(),USER_EMAIL_REGEX)){
+            violations.add(new ConstraintViolation(user.getClass().getName(),
+                    "email", user.getFirstName(), "User email is not valid" ));
         }
         if(violations.size() > 0){
             setUniqueStringIdentifier(user.getUsername());

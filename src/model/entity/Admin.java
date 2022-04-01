@@ -2,87 +2,92 @@ package model.entity;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import static model.Role.ADMIN;
 
 public class Admin extends User{
-    private List<Movie> moviesModerated;
-    private List<User> usersModerated;
-    private List<DailyProgram> programsModerated;
-    private List<Hall> hallsModerated;
-    private List<Review> reviewsModerated;
-    private List<Projection> projectionsModerated;
-    private List<Ticket> ticketsModerated;
+    private Set<Movie> moviesModerated;
+    private Set<User> usersModerated;
+    private Set<DailyProgram> programsModerated;
+    private Set<Hall> hallsModerated;
+    private Set<Review> reviewsModerated;
+    private Set<Projection> projectionsModerated;
+    private Set<Ticket> ticketsModerated;
 
-    public List<DailyProgram> getProgramsModerated() {
+    public Set<Movie> getMoviesModerated() {
+        return moviesModerated;
+    }
+
+    public void setMoviesModerated(Set<Movie> moviesModerated) {
+        this.moviesModerated = moviesModerated;
+    }
+
+    public Set<DailyProgram> getProgramsModerated() {
         return programsModerated;
     }
 
-    public void setProgramsModerated(List<DailyProgram> programsModerated) {
+    public void setProgramsModerated(Set<DailyProgram> programsModerated) {
         this.programsModerated = programsModerated;
     }
 
-    private List<Snack> snacksModerated;
+    public Set<Hall> getHallsModerated() {
+        return hallsModerated;
+    }
+
+    public void setHallsModerated(Set<Hall> hallsModerated) {
+        this.hallsModerated = hallsModerated;
+    }
+
+    public Set<Review> getReviewsModerated() {
+        return reviewsModerated;
+    }
+
+    public void setReviewsModerated(Set<Review> reviewsModerated) {
+        this.reviewsModerated = reviewsModerated;
+    }
+
+    public Set<Projection> getProjectionsModerated() {
+        return projectionsModerated;
+    }
+
+    public void setProjectionsModerated(Set<Projection> projectionsModerated) {
+        this.projectionsModerated = projectionsModerated;
+    }
+
+    public Set<Ticket> getTicketsModerated() {
+        return ticketsModerated;
+    }
+
+    public void setTicketsModerated(Set<Ticket> ticketsModerated) {
+        this.ticketsModerated = ticketsModerated;
+    }
+
+    public Set<Snack> getSnacksModerated() {
+        return snacksModerated;
+    }
+
+    public void setSnacksModerated(Set<Snack> snacksModerated) {
+        this.snacksModerated = snacksModerated;
+    }
+
+    private Set<Snack> snacksModerated;
 
     public Admin(String firstName, String lastName, String username, String password, String email) {
         super(firstName, lastName, username, password, email, ADMIN);
     }
 
-    public List<Movie> getMoviesModerated() {
-        return moviesModerated;
-    }
 
-    public void setMoviesModerated(List<Movie> moviesModerated) {
-        this.moviesModerated = moviesModerated;
-    }
-
-    public List<User> getUsersModerated() {
+    public Set<User> getUsersModerated() {
         return usersModerated;
     }
 
-    public void setUsersModerated(List<User> usersModerated) {
+    public void setUsersModerated(Set<User> usersModerated) {
         this.usersModerated = usersModerated;
     }
 
-    public List<Snack> getSnacksModerated() {
-        return snacksModerated;
-    }
 
-    public List<Hall> getHallsModerated() {
-        return hallsModerated;
-    }
 
-    public void setHallsModerated(List<Hall> hallsModerated) {
-        this.hallsModerated = hallsModerated;
-    }
-
-    public List<Review> getReviewsModerated() {
-        return reviewsModerated;
-    }
-
-    public void setReviewsModerated(List<Review> reviewsModerated) {
-        this.reviewsModerated = reviewsModerated;
-    }
-
-    public List<Projection> getProjectionsModerated() {
-        return projectionsModerated;
-    }
-
-    public void setProjectionsModerated(List<Projection> projectionsModerated) {
-        this.projectionsModerated = projectionsModerated;
-    }
-
-    public List<Ticket> getTicketsModerated() {
-        return ticketsModerated;
-    }
-
-    public void setTicketsModerated(List<Ticket> ticketsModerated) {
-        this.ticketsModerated = ticketsModerated;
-    }
-
-    public void setSnacksModerated(List<Snack> snacksModerated) {
-        this.snacksModerated = snacksModerated;
-    }
 
     @Override
     public boolean equals(Object o) {

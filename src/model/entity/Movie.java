@@ -15,24 +15,21 @@ public class Movie implements Identifiable<Integer> {
     private Genre genre;
     private String description;
     private LocalDate releaseDate;
+    private String directorName;
+    private String studioName;
 
-    public Movie(int length, double price, String movieName, Genre genre, String description, LocalDate releaseDate) {
+    public Movie(int length, double price, String movieName, Genre genre, String description, LocalDate releaseDate,
+                 String directorName, String studioName) {
         this.length = length;
         this.price = price;
         this.movieName = movieName;
         this.genre = genre;
         this.description = description;
         this.releaseDate = releaseDate;
+        this.directorName = directorName;
+        this.studioName = studioName;
     }
 
-    public Movie(int length, double price, String movieName, Genre genre, String description, LocalDate releaseDate, List<Review> reviews) {
-        this.length = length;
-        this.price = price;
-        this.movieName = movieName;
-        this.genre = genre;
-        this.description = description;
-        this.releaseDate = releaseDate;
-    }
 
     public Movie(Integer id) {
         this.id = id;
@@ -95,6 +92,21 @@ public class Movie implements Identifiable<Integer> {
         this.releaseDate = releaseDate;
     }
 
+    public String getDirectorName() {
+        return directorName;
+    }
+
+    public void setDirectorName(String directorName) {
+        this.directorName = directorName;
+    }
+
+    public String getStudioName() {
+        return studioName;
+    }
+
+    public void setStudioName(String studioName) {
+        this.studioName = studioName;
+    }
 
     @Override
     public boolean equals(Object o) {

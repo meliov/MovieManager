@@ -51,7 +51,7 @@ public class Ticket implements Identifiable<Integer> {
         return user;
     }
 
-    public void setUser(RegisteredUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

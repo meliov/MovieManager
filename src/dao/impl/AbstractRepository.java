@@ -38,6 +38,7 @@ import java.util.*;
             throw new EntityAlreadyExistsException( entityName+ " with id = " + entity.getId() + " already exists.");
         }
         entity.setId(idGenerator.getNextId());
+        //comment upper and add new if u want to read from db
         entityMap.put(entity.getId(), entity);
         return entity;
     }

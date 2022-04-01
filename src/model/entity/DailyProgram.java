@@ -6,13 +6,14 @@ import model.DayOfWeek;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 
 public class DailyProgram implements Identifiable<Integer> {//implements Identifiable<Long> {
    private Integer id;
     private DayOfWeek dayOfWeek;
-    private List<Projection> projections;
+    private Set<Projection> projections;
 
-    public DailyProgram(DayOfWeek dayOfWeek, List<Projection> projections) {
+    public DailyProgram(DayOfWeek dayOfWeek, Set<Projection> projections) {
         this.dayOfWeek = dayOfWeek;
         this.projections = projections;
     }
@@ -34,11 +35,11 @@ public class DailyProgram implements Identifiable<Integer> {//implements Identif
         this.dayOfWeek = dayOfWeek;
     }
 
-    public List<Projection> getProjections() {
+    public Set<Projection> getProjections() {
         return projections;
     }
 
-    public void setProjections(List<Projection> projections) {
+    public void setProjections(Set<Projection> projections) {
         this.projections = projections;
     }
 
