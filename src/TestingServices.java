@@ -2,6 +2,7 @@ import dao.DaoFactory;
 import dao.exception.ConstraintViolationException;
 import dao.exception.EntityAlreadyExistsException;
 import dao.exception.InvalidEntityDataException;
+import dao.exception.NonExistingEntityException;
 import dao.impl.DaoFactoryImpl;
 import model.entity.RegisteredUser;
 import model.entity.User;
@@ -23,8 +24,8 @@ public class TestingServices {
         var invalidUser = new RegisteredUser("rtasd", " Eskel","Lambert", "123458", "Eskel@abv.bg");
         DaoFactory daoFactory = new DaoFactoryImpl();
         UserService userService = new UserServiceIml(daoFactory.createUserRepository("users.db"), new UserValidator());
-//validation ti fix
-        //        try {
+
+//                try {
 //            try {
 //                userService.create(invalidUser);
 //            } catch (EntityAlreadyExistsException e) {
@@ -52,13 +53,8 @@ public class TestingServices {
         System.out.println();
         System.out.println("TESTING PERSISTABLE REPO");
         System.out.println();
-        for(User u: MOCK_USERS){
-            try {
-                userService.create(u);
-            } catch (EntityAlreadyExistsException | InvalidEntityDataException e) {
-                e.printStackTrace();
-            }
-        }
+
+        var existingUsernameUser = new RegisteredUser("rtasd", " Eskel","tade", "123458", "Eskel@abv.bg");
 
 //        userService.load();
 //        try {
@@ -66,12 +62,26 @@ public class TestingServices {
 //            } catch (EntityAlreadyExistsException | InvalidEntityDataException e) {
 //                e.printStackTrace();
 //            }
-        userService.load();
+
+                userService.load();
+        try {
+                userService.create(existingUsernameUser);
+            } catch (EntityAlreadyExistsException | InvalidEntityDataException e) {
+                e.printStackTrace();
+            }
+
+
+//        try {
+//            userService.deleteById(6);
+//        } catch (NonExistingEntityException e) {
+//            e.printStackTrace();
+//        }
+        userService.load();// metod v admin survisa da maha ili dobavq filmi v samiq user / sushto zaduljitelna validaciq predi repotata v adminService
        userService.findAll().forEach(System.out::println);
 
 //        System.out.println("Movies");
 //        var movies
 //                = new LinkedHashSet<>(MOCK_MOVIES);
-//        movies.forEach(System.out::println); //sichki id-ta sa null i gi smeta za 1 i susht
+//        movies.forEach(System.out::println); //sichki id-ta sa null i gi smeta za 1 i sushto tui kato tva e set, sichko se opravq pri chetene ne ot mock a veche ot faila
     }
 }

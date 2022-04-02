@@ -40,4 +40,13 @@ class UserRepositoryImpl extends PersistableRepositoryFileImpl<Integer, User> im
          return user.get();
      }
 
- }
+    @Override
+    public boolean containsUsername(String username) {
+        var user = entityMap.values()
+                .stream()
+                .filter(e -> e.getUsername().equals(username))
+                .findAny();
+        return user.isPresent();
+    }
+
+}
