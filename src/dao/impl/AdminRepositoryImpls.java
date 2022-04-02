@@ -8,7 +8,7 @@ import model.entity.*;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class AdminRepositoryImpls extends UserRepositoryImpl implements AdminRepository {
+ class AdminRepositoryImpls extends UserRepositoryImpl implements AdminRepository {
     public AdminRepositoryImpls(IdGenerator<Integer> idGenerator, String fileName) {
         super(idGenerator, fileName);
     }

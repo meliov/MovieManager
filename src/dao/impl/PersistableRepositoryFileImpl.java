@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class PersistableRepositoryFileImpl<K, V extends Identifiable<K>> extends AbstractPersistableRepository<K, V> {
+ class PersistableRepositoryFileImpl<K, V extends Identifiable<K>> extends AbstractPersistableRepository<K, V> {
     private String dbFileName;
 
     public PersistableRepositoryFileImpl(IdGenerator<K> idGenerator, String entityName,String dbFileName) {

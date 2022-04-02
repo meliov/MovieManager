@@ -9,7 +9,7 @@ import dao.repository.PersistableRepository;
 
 import java.util.*;
 
-public abstract class AbstractPersistableRepository<K,V extends Identifiable<K>>
+ abstract class AbstractPersistableRepository<K,V extends Identifiable<K>>
         implements PersistableRepository<K,V> {
     protected Map<K, V> entityMap = new LinkedHashMap<>();
     private IdGenerator<K> idGenerator;
