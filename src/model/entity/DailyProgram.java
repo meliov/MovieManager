@@ -3,12 +3,14 @@ package model.entity;
 import dao.Identifiable;
 import model.DayOfWeek;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-public class DailyProgram implements Identifiable<Integer> {//implements Identifiable<Long> {
+public class DailyProgram implements Identifiable<Integer>, Serializable {
+    private static final long serialVersionUID = 1L;
    private Integer id;
     private DayOfWeek dayOfWeek;
     private Set<Projection> projections;

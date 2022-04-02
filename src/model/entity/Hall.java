@@ -2,11 +2,13 @@ package model.entity;
 
 import dao.Identifiable;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Hall implements Identifiable<Integer> {
+public class Hall implements Identifiable<Integer>, Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private int rows;
     private int seats;

@@ -4,10 +4,12 @@ import dao.Identifiable;
 import model.Role;
 import model.UserStatus;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public abstract class User implements Identifiable<Integer> {
+public abstract class User implements Identifiable<Integer>, Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private String firstName;
     private String lastName;

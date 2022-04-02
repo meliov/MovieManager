@@ -2,9 +2,11 @@ package model.entity;
 
 import dao.Identifiable;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Ticket implements Identifiable<Integer> {
+public class Ticket implements Identifiable<Integer> , Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private Movie movie;
     private User user;

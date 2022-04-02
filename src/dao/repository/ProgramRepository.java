@@ -7,7 +7,7 @@ import model.entity.Projection;
 
 import java.util.Collection;
 
-public interface ProgramRepository extends Repository<Integer, DailyProgram>{
+public interface ProgramRepository extends PersistableRepository<Integer, DailyProgram>{
     DailyProgram findByDayOfWeek(DayOfWeek dayOfWeek) throws NonExistingEntityException;
 
 }

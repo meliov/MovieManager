@@ -1,12 +1,14 @@
 package model.entity;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 import static model.Role.ADMIN;
 
-public class Admin extends User{
+public class Admin extends User implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Set<Movie> moviesModerated;
     private Set<User> usersModerated;
     private Set<DailyProgram> programsModerated;

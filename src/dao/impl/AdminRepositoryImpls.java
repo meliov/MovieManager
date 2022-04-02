@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.IdGenerator;
 import dao.exception.NonExistingEntityException;
 import dao.repository.AdminRepository;
 import model.entity.*;
@@ -8,8 +9,8 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class AdminRepositoryImpls extends UserRepositoryImpl implements AdminRepository {
-    public AdminRepositoryImpls(IdGenerator<Integer> idGenerator) {
-        super(idGenerator);
+    public AdminRepositoryImpls(IdGenerator<Integer> idGenerator, String fileName) {
+        super(idGenerator, fileName);
     }
 
     @Override

@@ -3,11 +3,13 @@ package model.entity;
 import dao.Identifiable;
 import model.Genre;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
-public class Movie implements Identifiable<Integer> {
+public class Movie implements Identifiable<Integer>, Serializable {
+    private static final long serialVersionUID = 1L;
     private Integer id;
     private int length;
     private double price;
@@ -125,12 +127,12 @@ public class Movie implements Identifiable<Integer> {
     public String toString() {
         return "Movie{" +
                 "id=" + id +
-                ", length=" + length +
-                ", price=" + price +
+              //  ", length=" + length +
+               // ", price=" + price +
                 ", movieName='" + movieName + '\'' +
                 ", genre=" + genre +
-                ", description='" + description + '\'' +
-                ", releaseDate=" + releaseDate +
+              //  ", description='" + description + '\'' +
+              //  ", releaseDate=" + releaseDate +
                // ", reviews=" + reviews +
                 '}';
     }

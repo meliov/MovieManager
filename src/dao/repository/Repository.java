@@ -18,21 +18,21 @@ public interface Repository<K, V extends Identifiable<K>>{
      * serves as id generator that can adjusted to current id of entity
      * @param <K> type of Entity ID
      */
-    interface IdGenerator<K>{
-        K getNextId();
-    }
-
-    /**
-     * implementation of IdGenerator for Long type id
-     */
-    class IntegerIdGenerator implements IdGenerator<Integer>{
-        private  Integer id = 0;
-
-        @Override
-        public Integer getNextId() {
-            return ++id;
-        }
-    }
+//    interface IdGenerator<K>{
+//        K getNextId();
+//    }
+//
+//    /**
+//     * implementation of IdGenerator for Long type id
+//     */
+//    class IntegerIdGenerator implements IdGenerator<Integer>{
+//        private  Integer id = 0;
+//
+//        @Override
+//        public Integer getNextId() {
+//            return ++id;
+//        }
+//    }
 
     /**
      * finds all elements of an entity sorted by using comparator
@@ -80,4 +80,7 @@ public interface Repository<K, V extends Identifiable<K>>{
      * @return count of the objects
      */
     long count();
+
+    void addAll(Collection<V> entities);
+    void clear();
 }

@@ -1,25 +1,24 @@
 package dao.impl;
 
+
+import dao.IdGenerator;
 import dao.Identifiable;
-import dao.repository.Repository;
 import dao.exception.EntityAlreadyExistsException;
 import dao.exception.NonExistingEntityException;
+import dao.repository.PersistableRepository;
 
 import java.util.*;
 
- abstract class AbstractRepository<K, V extends Identifiable<K>> implements Repository<K, V > {
+public abstract class AbstractPersistableRepository<K,V extends Identifiable<K>>
+        implements PersistableRepository<K,V> {
     protected Map<K, V> entityMap = new LinkedHashMap<>();
     private IdGenerator<K> idGenerator;
     private String entityName;
-    public AbstractRepository(IdGenerator<K> idGenerator, String string ){
+    public AbstractPersistableRepository(IdGenerator<K> idGenerator, String string ){
         this.idGenerator = idGenerator;
         this.entityName = string;
     }
 
-
-     public void print(V entity){
-         System.out.println(entity.getClass());
-     }
     @Override
     public List<V> findAllSorted(Comparator<V> comparator) {
         List<V> sorted = new ArrayList<>(entityMap.values());
@@ -33,7 +32,7 @@ import java.util.*;
     }
 
     @Override
-    public V create(V entity) throws  EntityAlreadyExistsException {
+    public V create(V entity) throws EntityAlreadyExistsException {
         if(entityMap.containsKey(entity.getId())){
             throw new EntityAlreadyExistsException( entityName+ " with id = " + entity.getId() + " already exists.");
         }
@@ -73,4 +72,38 @@ import java.util.*;
     public long count() {
         return entityMap.size();
     }
+
+
+
+    @Override
+    public void addAll(Collection<V> entities) {
+        for(var entity: entities) {
+            entityMap.put(entity.getId(), entity);
+        }
+    }
+
+    @Override
+    public void clear() {
+        entityMap.clear();
+    }
+
+
+
+    public IdGenerator<K> getIdGenerator() {
+        return idGenerator;
+    }
+
+    public void setIdGenerator(IdGenerator<K> idGenerator) {
+        this.idGenerator = idGenerator;
+    }
 }
+
+
+
+
+
+
+
+
+
+

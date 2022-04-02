@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.IdGenerator;
 import dao.exception.NonExistingEntityException;
 import dao.repository.HallRepository;
 import model.DayOfWeek;
@@ -10,9 +11,9 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
- class HallRepositoryImpl extends AbstractRepository<Integer, Hall> implements HallRepository {
-    public HallRepositoryImpl(IdGenerator<Integer> idGenerator) {
-        super(idGenerator, "hall");
+ class HallRepositoryImpl extends PersistableRepositoryFileImpl<Integer, Hall> implements HallRepository {
+    public HallRepositoryImpl(IdGenerator<Integer> idGenerator, String filename) {
+        super(idGenerator, "hall", filename);
     }
 
     @Override

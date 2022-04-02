@@ -6,7 +6,7 @@ import model.entity.*;
 
 import java.util.Collection;
 
-public interface UserRepository extends Repository<Integer, User> {
+public interface UserRepository extends PersistableRepository<Integer, User> {
     User findByUsername(String username) throws NonExistingEntityException;
     User findByEmail(String email) throws NonExistingEntityException;
 

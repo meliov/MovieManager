@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static model.DayOfWeek.MONDAY;
@@ -35,10 +37,11 @@ public class TestingRepository {
 
         //user repo
         DaoFactory daoFactory = new DaoFactoryImpl();
-        UserRepository userRepository = daoFactory.createUserRepository();
+        UserRepository userRepository = daoFactory.createUserRepository("users.db");
         for(User u: MOCK_USERS){
             try {
                 userRepository.create(u);
+                userRepository.save();
             } catch (EntityAlreadyExistsException e) {
                 e.printStackTrace();
             }
@@ -62,10 +65,11 @@ public class TestingRepository {
         System.out.println();
         System.out.println("Movies\tMovies\tMovies\tMovies\tMovies");
         System.out.println();
-        MovieRepository movieRepository = daoFactory.createMovieRepository();
+        MovieRepository movieRepository = daoFactory.createMovieRepository("movies.db");
         for(Movie m : MOCK_MOVIES){
             try {
                 movieRepository.create(m);
+                movieRepository.save();
             } catch (EntityAlreadyExistsException e) {
                 e.printStackTrace();
             }
@@ -118,10 +122,11 @@ public class TestingRepository {
         System.out.println("Review\tReview\tReview\tReview\tReview");
         System.out.println();
 
-        ReviewRepository reviewRepository = daoFactory.createReviewRepository();
+        ReviewRepository reviewRepository = daoFactory.createReviewRepository("review.db");
         for(Review r : MOCK_REVIEWS){
             try {
                 reviewRepository.create(r);
+                reviewRepository.save();
             } catch (EntityAlreadyExistsException e) {
                 e.printStackTrace();
             }
@@ -155,7 +160,7 @@ public class TestingRepository {
             e.printStackTrace();
         }
         //projections
-        ProjectionRepository projectionRepository = daoFactory.createProjectionRepository();
+        ProjectionRepository projectionRepository = daoFactory.createProjectionRepository("projection.db");
         System.out.println();
         System.out.println();
         System.out.println();
@@ -164,6 +169,7 @@ public class TestingRepository {
         for(Projection p: MOCK_PROJECTIONS){
             try {
                 projectionRepository.create(p);
+                projectionRepository.save();
             } catch (EntityAlreadyExistsException e) {
                 e.printStackTrace();
             }
@@ -178,11 +184,12 @@ public class TestingRepository {
         System.out.println();
         System.out.println("Daily program");
         System.out.println();
-        ProgramRepository programRepository = daoFactory.createProgramRepository();
+        ProgramRepository programRepository = daoFactory.createProgramRepository("program.db");
 
         for(DailyProgram d: MOCK_PROGRAM){
             try {
                 programRepository.create(d);
+                programRepository.save();
             } catch (EntityAlreadyExistsException e) {
                 e.printStackTrace();
             }
@@ -210,10 +217,11 @@ public class TestingRepository {
         System.out.println("Hall");
         System.out.println();
 
-        HallRepository hallRepository = daoFactory.createHallRepository();
+        HallRepository hallRepository = daoFactory.createHallRepository("hall.db");
         for(Hall h: MOCK_HALLS ){
             try {
                 hallRepository.create(h);
+                hallRepository.save();
             } catch (EntityAlreadyExistsException e) {
                 e.printStackTrace();
             }
@@ -255,14 +263,16 @@ public class TestingRepository {
         System.out.println("Tickets");
         System.out.println();
 
-        TicketRepository ticketRepository = daoFactory.createTicketRepository();
-        for(Ticket t: MOCK_TICKETS){
-            try {
-                ticketRepository.create(t);
-            } catch (EntityAlreadyExistsException e) {
-                e.printStackTrace();
-            }
-        }
+        TicketRepository ticketRepository = daoFactory.createTicketRepository("tickets.db");
+//        for(Ticket t: MOCK_TICKETS){
+//            try {
+//                ticketRepository.create(t);
+//                ticketRepository.save();
+//            } catch (EntityAlreadyExistsException e) {
+//                e.printStackTrace();
+//            }
+//        }
+        ticketRepository.load();
         System.out.println("Printing tickets");
         System.out.println();
         for(Ticket t: ticketRepository.findAll()){
@@ -309,6 +319,7 @@ public class TestingRepository {
 //            e.printStackTrace();
 //        }
         //registered users
+
 
 
     }

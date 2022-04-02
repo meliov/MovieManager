@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.IdGenerator;
 import dao.exception.NonExistingEntityException;
 import dao.repository.UserRepository;
 import model.entity.*;
@@ -8,10 +9,10 @@ import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-class UserRepositoryImpl extends AbstractRepository<Integer, User> implements UserRepository {
+class UserRepositoryImpl extends PersistableRepositoryFileImpl<Integer, User> implements UserRepository {
 
-    public UserRepositoryImpl(IdGenerator<Integer> idGenerator) {
-        super(idGenerator, "user");
+    public UserRepositoryImpl(IdGenerator<Integer> idGenerator, String fileName) {
+        super(idGenerator, "user", fileName);
     }
 
 

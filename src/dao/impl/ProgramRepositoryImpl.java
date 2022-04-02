@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.IdGenerator;
 import dao.exception.NonExistingEntityException;
 import dao.repository.ProgramRepository;
 import model.DayOfWeek;
@@ -9,9 +10,9 @@ import model.entity.Projection;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
- class ProgramRepositoryImpl extends AbstractRepository<Integer, DailyProgram> implements ProgramRepository {
-    public ProgramRepositoryImpl(IdGenerator<Integer> idGenerator) {
-        super(idGenerator, "program");
+ class ProgramRepositoryImpl extends PersistableRepositoryFileImpl<Integer, DailyProgram> implements ProgramRepository {
+    public ProgramRepositoryImpl(IdGenerator<Integer> idGenerator, String fileName) {
+        super(idGenerator, "program", fileName);
     }
 
     @Override

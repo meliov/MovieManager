@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.IdGenerator;
 import dao.exception.NonExistingEntityException;
 import dao.repository.MovieRepository;
 import model.Genre;
@@ -9,9 +10,9 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-class MovieRepositoryImpl extends AbstractRepository<Integer, Movie> implements MovieRepository {
-    public MovieRepositoryImpl(IdGenerator<Integer> idGenerator) {
-        super(idGenerator, "movie");
+class MovieRepositoryImpl extends PersistableRepositoryFileImpl<Integer, Movie> implements MovieRepository {
+    public MovieRepositoryImpl(IdGenerator<Integer> idGenerator, String fileName) {
+        super(idGenerator, "movie", fileName);
     }
 
     @Override

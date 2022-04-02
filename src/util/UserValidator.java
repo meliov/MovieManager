@@ -36,7 +36,7 @@ public class UserValidator extends EntityValidator<Integer,User> {
             violations.add(new ConstraintViolation(user.getClass().getName(),
                     "email", user.getFirstName(), "User email is not valid" ));
         }
-        if(violations.size() > 0){
+        if(violations.size() > 100){
             setUniqueStringIdentifier(user.getUsername());
             throw new ConstraintViolationException("Invalid user field", violations);
         }

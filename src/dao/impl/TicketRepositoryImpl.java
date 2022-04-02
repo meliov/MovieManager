@@ -1,5 +1,6 @@
 package dao.impl;
 
+import dao.IdGenerator;
 import dao.exception.NonExistingEntityException;
 import dao.repository.TicketRepository;
 import model.entity.*;
@@ -7,9 +8,9 @@ import model.entity.*;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
- class TicketRepositoryImpl extends AbstractRepository<Integer, Ticket> implements TicketRepository {
-    public TicketRepositoryImpl(IdGenerator idGenerator) {
-        super(idGenerator, "ticket");
+ class TicketRepositoryImpl extends PersistableRepositoryFileImpl<Integer, Ticket> implements TicketRepository {
+    public TicketRepositoryImpl(IdGenerator idGenerator, String fileName) {
+        super(idGenerator, "ticket", fileName);
     }
 
     @Override

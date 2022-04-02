@@ -19,4 +19,5 @@ public interface Service<K, V extends Identifiable<K>> {
     V findById(K id) throws NonExistingEntityException;
     V deleteById(K id) throws NonExistingEntityException;
     long count();
+    void load();
 }

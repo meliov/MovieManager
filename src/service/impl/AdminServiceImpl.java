@@ -18,13 +18,13 @@ import java.util.List;
 
 public class AdminServiceImpl extends UserServiceIml implements AdminService {
     private DaoFactory daoFactory;
-    private final TicketRepository ticketRepository = daoFactory.createTicketRepository();
-    private final MovieRepository movieRepository = daoFactory.createMovieRepository();
-    private final ProjectionRepository projectionRepository = daoFactory.createProjectionRepository();
-    private final ProgramRepository programRepository = daoFactory.createProgramRepository();
-    private final HallRepository hallRepository = daoFactory.createHallRepository();
-    private final ReviewRepository reviewRepository = daoFactory.createReviewRepository();
-    private final RegisteredUserRepository registeredUserRepository = daoFactory.createRegisteredUserRepository();
+    private final TicketRepository ticketRepository = daoFactory.createTicketRepository("tickets.db");
+    private final MovieRepository movieRepository = daoFactory.createMovieRepository("movies.db");
+    private final ProjectionRepository projectionRepository = daoFactory.createProjectionRepository("projection.db");
+    private final ProgramRepository programRepository = daoFactory.createProgramRepository("program.db");
+    private final HallRepository hallRepository = daoFactory.createHallRepository("hall.db");
+    private final ReviewRepository reviewRepository = daoFactory.createReviewRepository("review.db");
+    private final RegisteredUserRepository registeredUserRepository = daoFactory.createRegisteredUserRepository("users.txt");
     public AdminServiceImpl(AdminRepository repository, UserValidator validator, DaoFactory daoFactory) {
         super(repository, validator);
         this.daoFactory = daoFactory;
@@ -84,17 +84,24 @@ public class AdminServiceImpl extends UserServiceIml implements AdminService {
     @Override
     public Movie updateMovie(Admin admin, Movie movie) throws NonExistingEntityException {
         admin.getMoviesModerated().add(movie);
-        //update watched
+        //update watched movie in user
         List<RegisteredUser> userList = new ArrayList<>(registeredUserRepository.findUsersByWatchedMovie(movie));
         for(RegisteredUser registeredUser: userList ){
             registeredUser.getWatchedMovies().add(movie);//getWatchedMovies is a hashSet
         }
-        //update favourite
+        //update favourite in user
        userList = new ArrayList<>(registeredUserRepository.findUsersByFavouriteMovie(movie));
         for(RegisteredUser registeredUser: userList ){
             registeredUser.getFavouriteMovies().add(movie);//getWatchedMovies is a hashSet
         }
+        //movie in reviews
+        List<Review> reviewsList = new ArrayList<>(reviewRepository.findByMovie(movie));
+        for(Review review: reviewsList){
+            review.setMovie(movie);
+           Review update = reviewRepository.update(review);
+        }
 
+        // movie in projection -> daily program -> hall
 
         return movieRepository.update(movie);
     }

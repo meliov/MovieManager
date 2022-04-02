@@ -1,52 +1,53 @@
 package dao.impl;
 
 import dao.DaoFactory;
+import dao.IntegerIdGenerator;
 import dao.repository.*;
 
 public class DaoFactoryImpl implements DaoFactory {
     @Override
-    public UserRepository createUserRepository() {
-        return new UserRepositoryImpl(new UserRepository.IntegerIdGenerator());
+    public UserRepository createUserRepository(String fileName) {
+        return new UserRepositoryImpl(new IntegerIdGenerator(), fileName);
     }
 
     @Override
-    public MovieRepository createMovieRepository() {
-        return new MovieRepositoryImpl(new MovieRepository.IntegerIdGenerator());
+    public MovieRepository createMovieRepository(String fileName) {
+        return new MovieRepositoryImpl(new IntegerIdGenerator(), fileName);
     }
 
     @Override
-    public ReviewRepository createReviewRepository() {
-        return new ReviewRepositoryImpl(new ReviewRepository.IntegerIdGenerator());
+    public ReviewRepository createReviewRepository(String fileName) {
+        return new ReviewRepositoryImpl(new IntegerIdGenerator(), fileName);
     }
 
     @Override
-    public ProgramRepository createProgramRepository() {
-        return new ProgramRepositoryImpl(new ProgramRepository.IntegerIdGenerator());
+    public ProgramRepository createProgramRepository(String fileName) {
+        return new ProgramRepositoryImpl(new IntegerIdGenerator(), fileName);
     }
 
     @Override
-    public ProjectionRepository createProjectionRepository() {
-        return new ProjectionRepositoryImpl(new ProjectionRepository.IntegerIdGenerator());
+    public ProjectionRepository createProjectionRepository(String fileName) {
+        return new ProjectionRepositoryImpl(new IntegerIdGenerator(), fileName);
     }
 
     @Override
-    public HallRepository createHallRepository() {
-        return new HallRepositoryImpl(new Repository.IntegerIdGenerator());
+    public HallRepository createHallRepository(String fileName) {
+        return new HallRepositoryImpl(new IntegerIdGenerator(), fileName);
     }
 
     @Override
-    public TicketRepository createTicketRepository() {
-        return new TicketRepositoryImpl( new Repository.IntegerIdGenerator());
+    public TicketRepository createTicketRepository(String fileName) {
+        return new TicketRepositoryImpl(new IntegerIdGenerator(), fileName);
     }
 
     @Override
-    public AdminRepository createAdminRepository() {
-        return new AdminRepositoryImpls(new Repository.IntegerIdGenerator());
+    public AdminRepository createAdminRepository(String fileName) {
+        return new AdminRepositoryImpls(new IntegerIdGenerator(), fileName);
     }
 
     @Override
-    public RegisteredUserRepository createRegisteredUserRepository() {
-        return new RegisteredUseRepositoryImpl(new Repository.IntegerIdGenerator());
+    public RegisteredUserRepository createRegisteredUserRepository(String fileName) {
+        return new RegisteredUseRepositoryImpl(new IntegerIdGenerator(), fileName);
     }
 
 }
