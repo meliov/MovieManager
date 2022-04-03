@@ -1,6 +1,7 @@
 package model.entity;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -9,13 +10,13 @@ import static model.Role.ADMIN;
 
 public class Admin extends User implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Set<Movie> moviesModerated;
-    private Set<User> usersModerated;
-    private Set<DailyProgram> programsModerated;
-    private Set<Hall> hallsModerated;
-    private Set<Review> reviewsModerated;
-    private Set<Projection> projectionsModerated;
-    private Set<Ticket> ticketsModerated;
+    private Set<Movie> moviesModerated = new LinkedHashSet<>();
+    private Set<RegisteredUser> usersModerated = new LinkedHashSet<>();
+    private Set<DailyProgram> programsModerated = new LinkedHashSet<>();
+    private Set<Hall> hallsModerated = new LinkedHashSet<>();
+    private Set<Review> reviewsModerated = new LinkedHashSet<>();
+    private Set<Projection> projectionsModerated = new LinkedHashSet<>();
+    private Set<Ticket> ticketsModerated = new LinkedHashSet<>();
 
     public Set<Movie> getMoviesModerated() {
         return moviesModerated;
@@ -79,12 +80,16 @@ public class Admin extends User implements Serializable {
         super(firstName, lastName, username, password, email, ADMIN);
     }
 
-
-    public Set<User> getUsersModerated() {
+    public Admin(Integer id) {
+        super(id);
+    }
+    public Admin() {
+    }
+    public Set<RegisteredUser> getUsersModerated() {
         return usersModerated;
     }
 
-    public void setUsersModerated(Set<User> usersModerated) {
+    public void setUsersModerated(Set<RegisteredUser> usersModerated) {
         this.usersModerated = usersModerated;
     }
 

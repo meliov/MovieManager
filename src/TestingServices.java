@@ -4,9 +4,14 @@ import dao.exception.EntityAlreadyExistsException;
 import dao.exception.InvalidEntityDataException;
 import dao.exception.NonExistingEntityException;
 import dao.impl.DaoFactoryImpl;
+import dao.repository.ReviewRepository;
+import dao.repository.TicketRepository;
+import model.entity.Admin;
 import model.entity.RegisteredUser;
 import model.entity.User;
+import service.AdminService;
 import service.UserService;
+import service.impl.AdminServiceImpl;
 import service.impl.UserServiceIml;
 import util.UserValidator;
 
@@ -63,12 +68,12 @@ public class TestingServices {
 //                e.printStackTrace();
 //            }
 
-                userService.load();
-        try {
-                userService.create(existingUsernameUser);
-            } catch (EntityAlreadyExistsException | InvalidEntityDataException e) {
-                e.printStackTrace();
-            }
+//                userService.load();
+//        try {
+//                userService.create(existingUsernameUser);
+//            } catch (EntityAlreadyExistsException | InvalidEntityDataException e) {
+//                e.printStackTrace();
+//            }
 
 
 //        try {
@@ -83,5 +88,46 @@ public class TestingServices {
 //        var movies
 //                = new LinkedHashSet<>(MOCK_MOVIES);
 //        movies.forEach(System.out::println); //sichki id-ta sa null i gi smeta za 1 i sushto tui kato tva e set, sichko se opravq pri chetene ne ot mock a veche ot faila
+
+        TicketRepository ticketRepository = daoFactory.createTicketRepository("tickets.db");
+        ReviewRepository reviewRepository = daoFactory.createReviewRepository("review.db");
+        var userValidator = new UserValidator();
+        AdminService adminService = new AdminServiceImpl(daoFactory.createAdminRepository("users.db"), userValidator, daoFactory);
+        RegisteredUser updatedUser = new RegisteredUser();
+        Admin admin = new Admin();
+        try {
+            if(userService.findById(1) instanceof RegisteredUser) {
+                updatedUser = (RegisteredUser) userService.findById(1);
+            }
+            if(userService.findById(3) instanceof  Admin) {
+                admin = (Admin) userService.findById(3);
+            }
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
+       // updatedUser.setUsername("Tade2");
+//        try {
+//            adminService.updateUser(admin, updatedUser);
+//        } catch (InvalidEntityDataException | NonExistingEntityException e) {
+//            e.printStackTrace();
+//        }
+
+        try {
+            adminService.deleteUser(admin,updatedUser);
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
+        System.out.println();
+        ticketRepository.load();
+        System.out.println("tickets: ");
+        System.out.println();
+        ticketRepository.findAll().forEach(System.out::println);
+        System.out.println();
+        reviewRepository.load();
+        System.out.println("reviews");
+        System.out.println();
+        reviewRepository.findAll().forEach(System.out::println);
+
+
     }
 }

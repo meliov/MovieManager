@@ -18,6 +18,9 @@ public class RegisteredUser extends User implements Serializable {
         super(id);
     }
 
+    public RegisteredUser() {
+    }
+
     public RegisteredUser(String firstName, String lastName, String username, String password, String email) {
         super(firstName, lastName, username, password, email, REGISTERED_USER);
     }

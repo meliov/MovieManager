@@ -47,8 +47,6 @@ public class UserValidator extends EntityValidator<Integer,User> {
             violations.add(new ConstraintViolation(user.getClass().getName(),
                     "username", user.getFirstName(), "Username already exists!"));
         }
-        System.out.println(":for username: "+ user.getUsername());
-        System.out.println(userRepository.containsUsername(user.getUsername()));
         if(violations.size() > 0){
             setUniqueStringIdentifier(user.getUsername());
             throw new ConstraintViolationException("Invalid user field", violations);

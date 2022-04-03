@@ -264,15 +264,15 @@ public class TestingRepository {
         System.out.println();
 
         TicketRepository ticketRepository = daoFactory.createTicketRepository("tickets.db");
-//        for(Ticket t: MOCK_TICKETS){
-//            try {
-//                ticketRepository.create(t);
-//                ticketRepository.save();
-//            } catch (EntityAlreadyExistsException e) {
-//                e.printStackTrace();
-//            }
-//        }
-        ticketRepository.load();
+        for(Ticket t: MOCK_TICKETS){
+            try {
+                ticketRepository.create(t);
+                ticketRepository.save();
+            } catch (EntityAlreadyExistsException e) {
+                e.printStackTrace();
+            }
+        }
+//        ticketRepository.load();
         System.out.println("Printing tickets");
         System.out.println();
         for(Ticket t: ticketRepository.findAll()){

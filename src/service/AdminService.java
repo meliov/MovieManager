@@ -1,5 +1,6 @@
 package service;
 
+import dao.exception.ConstraintViolationException;
 import dao.exception.EntityAlreadyExistsException;
 import dao.exception.InvalidEntityDataException;
 import dao.exception.NonExistingEntityException;
@@ -11,9 +12,9 @@ public interface AdminService  {
     DailyProgram addDailyProgram(Admin admin,DailyProgram dailyProgram);
     DailyProgram deleteDailyProgram(Admin admin,DailyProgram dailyProgram);
     DailyProgram updateDailyProgram(Admin admin,DailyProgram dailyProgram);
-    User updateUser(Admin admin, User registeredUser) throws InvalidEntityDataException, NonExistingEntityException;
-    User addUser(Admin admin, User registeredUser) throws InvalidEntityDataException, EntityAlreadyExistsException;
-    User deleteUser(Admin admin, User registeredUser) throws NonExistingEntityException;
+    User updateUser(Admin admin, RegisteredUser registeredUser) throws InvalidEntityDataException, NonExistingEntityException;
+    User addUser(Admin admin, RegisteredUser registeredUser) throws InvalidEntityDataException, EntityAlreadyExistsException;
+    User deleteUser(Admin admin, RegisteredUser registeredUser) throws NonExistingEntityException;
     Hall addHall(Admin admin,Hall hall);
     Hall deleteHall(Admin admin,Hall hall);
     Hall updateHall(Admin admin,Hall hall);
@@ -26,7 +27,8 @@ public interface AdminService  {
     Review updateReview(Admin admin,Review review);
     Review deleteReview(Admin admin,Review review);
     Review addReview(Admin admin,Review review);
-    Movie addMovie(Admin admin,Movie movie) throws EntityAlreadyExistsException;
-    Movie updateMovie(Admin admin,Movie movie) throws NonExistingEntityException;
+    Movie addMovie(Admin admin,Movie movie) throws EntityAlreadyExistsException, ConstraintViolationException;
+    Movie updateMovie(Admin admin,Movie movie) throws NonExistingEntityException, ConstraintViolationException, InvalidEntityDataException;
     Movie deleteMovie(Admin admin,Movie movie);
+
 }

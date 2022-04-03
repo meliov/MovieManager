@@ -28,11 +28,13 @@ public abstract class AbstractServiceImpl<K, V extends Identifiable<K>, R extend
 
     @Override
     public List<V> findAllSorted(Comparator<V> comparator) {
+        load();
         return repository.findAllSorted(comparator);
     }
 
     @Override
     public Collection<V> findAll() {
+        load();
         return repository.findAll();
     }
 
@@ -51,6 +53,7 @@ public abstract class AbstractServiceImpl<K, V extends Identifiable<K>, R extend
 
     @Override
     public V update(V entity) throws NonExistingEntityException, InvalidEntityDataException {
+        load();
         try {
             validator.validate(entity);
         } catch (ConstraintViolationException e) {
@@ -64,11 +67,13 @@ public abstract class AbstractServiceImpl<K, V extends Identifiable<K>, R extend
 
     @Override
     public V findById(K id) throws NonExistingEntityException {
+        load();
         return repository.findById(id);
     }
 
     @Override
     public V deleteById(K id) throws NonExistingEntityException {
+        load();
         var deleted = repository.deleteById(id);
         repository.save();
         return deleted;
@@ -76,6 +81,7 @@ public abstract class AbstractServiceImpl<K, V extends Identifiable<K>, R extend
 
     @Override
     public long count() {
+        load();
         return repository.count();
     }
 

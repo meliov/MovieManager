@@ -20,6 +20,9 @@ public abstract class User implements Identifiable<Integer>, Serializable {
     private LocalDate registrationDate;
     private UserStatus status;
 
+    public User() {
+    }
+
     public User(String firstName, String lastName, String username,
                 String password, String email, Role role) {
         this.firstName = firstName;
