@@ -160,7 +160,7 @@ public class AdminServiceImpl extends UserServiceIml implements AdminService {
     }
 
     @Override
-    public Movie deleteMovie(Admin admin, Movie movie) throws InvalidEntityDataException {
+    public Movie deleteMovie(Admin admin, Movie movie) throws InvalidEntityDataException, NonExistingEntityException {
         repository.load();
         movieRepository.load();
         reviewRepository.load();
@@ -221,30 +221,71 @@ public class AdminServiceImpl extends UserServiceIml implements AdminService {
     }
 
     @Override
-    public DailyProgram addDailyProgram(Admin admin, DailyProgram dailyProgram) {
-        return null;
+    public DailyProgram addDailyProgram(Admin admin, DailyProgram dailyProgram) throws EntityAlreadyExistsException {
+        programRepository.load();
+        var addedProgram = programRepository.create(dailyProgram);
+        programRepository.save();
+        return addedProgram;
+
     }
 
     @Override
-    public DailyProgram deleteDailyProgram(Admin admin, DailyProgram dailyProgram) {
-        return null;
+    public DailyProgram deleteDailyProgram(Admin admin, DailyProgram dailyProgram) throws NonExistingEntityException {
+        programRepository.load();
+        hallRepository.load();
+        ticketRepository.load();
+        for(Hall hall: hallRepository.findAll()){
+            List<DailyProgram> hallProgram = Arrays.asList(hall.getMovieProgram());
+            hallProgram.remove(dailyProgram);
+            hall.setMovieProgram(hallProgram.toArray(DailyProgram[]::new));
+            hallRepository.update(hall);
+        }
+        admin.getProgramsModerated().add(dailyProgram);
+        var deletedProgram = programRepository.deleteById(dailyProgram.getId());
+        programRepository.save();
+        hallRepository.save();
+        return deletedProgram;
     }
 
     @Override
-    public DailyProgram updateDailyProgram(Admin admin, DailyProgram dailyProgram) {
-        return null;
+    public DailyProgram updateDailyProgram(Admin admin, DailyProgram dailyProgram) throws NonExistingEntityException {
+        programRepository.load();
+        hallRepository.load();
+        for(Hall hall: hallRepository.findAll()){
+            List<DailyProgram> hallProgram = Arrays.asList(hall.getMovieProgram());
+            hallProgram.set(hallProgram.indexOf(dailyProgram), dailyProgram);
+            hall.setMovieProgram(hallProgram.toArray(DailyProgram[]::new));
+            hallRepository.update(hall);
+        }
+        admin.getProgramsModerated().add(dailyProgram);
+        var updatedProgram = programRepository.update(dailyProgram);
+        programRepository.save();
+        hallRepository.save();
+        return updatedProgram;
     }
 
 
 
     @Override
-    public Hall addHall(Admin admin, Hall hall) {
-        return null;
+    public Hall addHall(Admin admin, Hall hall) throws EntityAlreadyExistsException {
+        hallRepository.load();
+        var addedHall = hallRepository.create(hall);
+        hallRepository.save();
+        return addedHall;
     }
 
     @Override
-    public Hall deleteHall(Admin admin, Hall hall) {
-        return null;
+    public Hall deleteHall(Admin admin, Hall hall) throws NonExistingEntityException {
+        hallRepository.load();
+        ticketRepository.load();
+        var deletedHall = hallRepository.deleteById(hall.getId());
+        List<Ticket> ticketList = new ArrayList<>(ticketRepository.findTicketsByHall(hall));
+        for(Ticket ticket: ticketList){
+            ticketRepository.deleteById(ticket.getId());
+        }
+        hallRepository.save();
+        ticketRepository.save();
+        return deletedHall;
     }
 
     @Override
