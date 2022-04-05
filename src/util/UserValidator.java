@@ -20,7 +20,7 @@ public class UserValidator extends EntityValidator<Integer,User> {
     private DaoFactory daoFactory = new DaoFactoryImpl();
     private UserRepository userRepository = daoFactory.createUserRepository("users.db");
     @Override
-    public void validate(User user) throws ConstraintViolationException {
+    public void validate(User user, boolean update) throws ConstraintViolationException {
         List<ConstraintViolation> violations = new ArrayList<>();
         if(!Regex.regexValidation(user.getUsername(), USER_NAMES_REGEX)){
             violations.add(new ConstraintViolation(user.getClass().getName(),
@@ -43,10 +43,13 @@ public class UserValidator extends EntityValidator<Integer,User> {
                     "email", user.getFirstName(), "User email is not valid" ));
         }
         userRepository.load();
+        if(!update){
         if(userRepository.containsUsername(user.getUsername())) {
             violations.add(new ConstraintViolation(user.getClass().getName(),
                     "username", user.getFirstName(), "Username already exists!"));
         }
+        }
+
         if(violations.size() > 0){
             setUniqueStringIdentifier(user.getUsername());
             throw new ConstraintViolationException("Invalid user field", violations);

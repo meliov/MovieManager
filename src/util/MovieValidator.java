@@ -12,7 +12,7 @@ import static util.Regex.*;
 
 public class MovieValidator extends EntityValidator<Integer, Movie>{
     @Override
-    public void validate(Movie movie) throws ConstraintViolationException {
+    public void validate(Movie movie, boolean update) throws ConstraintViolationException {
         List<ConstraintViolation> violations = new ArrayList<>();
         if(!Regex.regexValidation(movie.getMovieName(), MOVIE_NAMES_REGEX)){
             violations.add(new ConstraintViolation(movie.getClass().getName(),

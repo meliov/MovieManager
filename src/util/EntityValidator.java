@@ -15,5 +15,5 @@ public abstract class EntityValidator< I,E extends Identifiable<I>>{
         this.uniqueStringIdentifier = uniqueStringIdentifier;
     }
 
-    public abstract void validate(E entity) throws ConstraintViolationException;
+    public abstract void validate(E entity, boolean update) throws ConstraintViolationException;
 }

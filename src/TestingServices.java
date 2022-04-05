@@ -4,9 +4,9 @@ import dao.exception.EntityAlreadyExistsException;
 import dao.exception.InvalidEntityDataException;
 import dao.exception.NonExistingEntityException;
 import dao.impl.DaoFactoryImpl;
-import dao.repository.ReviewRepository;
-import dao.repository.TicketRepository;
+import dao.repository.*;
 import model.entity.Admin;
+import model.entity.Movie;
 import model.entity.RegisteredUser;
 import model.entity.User;
 import service.AdminService;
@@ -29,6 +29,10 @@ public class TestingServices {
         var invalidUser = new RegisteredUser("rtasd", " Eskel","Lambert", "123458", "Eskel@abv.bg");
         DaoFactory daoFactory = new DaoFactoryImpl();
         UserService userService = new UserServiceIml(daoFactory.createUserRepository("users.db"), new UserValidator());
+        MovieRepository movieRepository = daoFactory.createMovieRepository("movies.db");
+        ProgramRepository programRepository = daoFactory.createProgramRepository("program.db");
+        ProjectionRepository projectionRepository = daoFactory.createProjectionRepository("projection.db");
+        HallRepository hallRepository = daoFactory.createHallRepository("hall.db");
 
 //                try {
 //            try {
@@ -81,6 +85,7 @@ public class TestingServices {
 //        } catch (NonExistingEntityException e) {
 //            e.printStackTrace();
 //        }
+
         userService.load();// metod v admin survisa da maha ili dobavq filmi v samiq user / sushto zaduljitelna validaciq predi repotata v adminService
        userService.findAll().forEach(System.out::println);
 
@@ -112,11 +117,11 @@ public class TestingServices {
 //            e.printStackTrace();
 //        }
 
-        try {
-            adminService.deleteUser(admin,updatedUser);
-        } catch (NonExistingEntityException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            adminService.deleteUser(admin,updatedUser);
+//        } catch (NonExistingEntityException e) {
+//            e.printStackTrace();
+//        }
         System.out.println();
         ticketRepository.load();
         System.out.println("tickets: ");
@@ -128,6 +133,70 @@ public class TestingServices {
         System.out.println();
         reviewRepository.findAll().forEach(System.out::println);
 
+  //testing updating a movie
+        System.out.println("BEFORE UPDATE");
+        movieRepository.load();
+        projectionRepository.load();
+        programRepository.load();
+        hallRepository.load();
 
+        System.out.println("movies");
+        System.out.println();
+        movieRepository.findAll().forEach(System.out::println);
+        System.out.println("projections");
+        System.out.println();
+        projectionRepository.findAll().forEach(System.out::println);
+        System.out.println("program");
+        System.out.println();
+        programRepository.findAll().forEach(System.out::println);
+        System.out.println("hall");
+        System.out.println();
+        hallRepository.findAll().forEach(System.out::println);
+        System.out.println("AFTER UPDATE");
+        var updateMovie = new Movie();
+        try {
+            updateMovie = movieRepository.findByMovieName("Batman");
+           // updateMovie.setMovieName("Batman REIGNS");
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
+
+        try {
+           // adminService.updateMovie(admin, updateMovie);
+           adminService.deleteMovie(admin, updateMovie);
+        } catch (NonExistingEntityException | InvalidEntityDataException e) {
+            e.printStackTrace();
+        }
+        movieRepository.load();
+        projectionRepository.load();
+        programRepository.load();
+        hallRepository.load();
+
+        System.out.println("movies");
+        System.out.println();
+        movieRepository.findAll().forEach(System.out::println);
+        System.out.println("projections");
+        System.out.println();
+        projectionRepository.findAll().forEach(System.out::println);
+        System.out.println("program");
+        System.out.println();
+        programRepository.findAll().forEach(System.out::println);
+        System.out.println("hall");
+        System.out.println();
+        hallRepository.findAll().forEach(System.out::println);
+        System.out.println("users");
+        System.out.println();
+        userService.load();
+        userService.findAll().forEach(System.out::println);
+        System.out.println();
+        ticketRepository.load();
+        System.out.println("tickets: ");
+        System.out.println();
+        ticketRepository.findAll().forEach(System.out::println);
+        System.out.println();
+        reviewRepository.load();
+        System.out.println("reviews");
+        System.out.println();
+        reviewRepository.findAll().forEach(System.out::println);
     }
 }

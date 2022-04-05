@@ -15,6 +15,7 @@ import java.util.Collection;
     public PersistableRepositoryFileImpl(IdGenerator<K> idGenerator, String entityName,String dbFileName) {
         super(idGenerator, entityName);
         this.dbFileName = dbFileName;
+
     }
 
     @Override

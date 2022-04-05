@@ -1,17 +1,18 @@
 import dao.DaoFactory;
+import dao.exception.InvalidEntityDataException;
 import dao.exception.NonExistingEntityException;
 import dao.repository.*;
 import dao.exception.EntityAlreadyExistsException;
 import dao.impl.DaoFactoryImpl;
 import model.DayOfWeek;
 import model.entity.*;
+import service.UserService;
+import service.impl.UserServiceIml;
+import util.UserValidator;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static model.DayOfWeek.MONDAY;
@@ -320,7 +321,38 @@ public class TestingRepository {
 //        }
         //registered users
 
+////////////////////////loading valid info
 
+        UserService userService = new UserServiceIml(userRepository, new UserValidator());
+        movieRepository.load();
+        var userWithMovies = new RegisteredUser();
+        try {
+            if(userService.findById(5) instanceof RegisteredUser && userService.findById(1) instanceof RegisteredUser) {
+                userWithMovies = (RegisteredUser) userService.findById(5);
+                userWithMovies.setWatchedMovies(new LinkedHashSet<>(movieRepository.findAll()));
+                try {
+                    userService.update(userWithMovies);
+                } catch (InvalidEntityDataException e) {
+                    e.printStackTrace();
+                }
+                userWithMovies = (RegisteredUser) userService.findById(1);
+                userWithMovies.setWatchedMovies(new LinkedHashSet<>(movieRepository.findAll()));
+                userWithMovies.setFavouriteMovies(new LinkedHashSet<>(Arrays.asList(movieRepository.findByMovieName("Batman"))));
+                try {
+                    userService.update(userWithMovies);
+                } catch (InvalidEntityDataException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                System.out.println("testing repo error");
+            }
+        } catch (NonExistingEntityException e) {
+            e.printStackTrace();
+        }
+        programRepository.load();
+        System.out.println("program");
+        System.out.println();
+        programRepository.findAll().forEach(System.out::println);
 
     }
 }

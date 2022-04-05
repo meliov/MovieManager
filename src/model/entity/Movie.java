@@ -36,6 +36,8 @@ public class Movie implements Identifiable<Integer>, Serializable {
     public Movie(Integer id) {
         this.id = id;
     }
+    public Movie() {
+    }
 
     @Override
     public void setId(Integer id) {

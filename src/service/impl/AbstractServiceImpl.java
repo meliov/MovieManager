@@ -41,7 +41,7 @@ public abstract class AbstractServiceImpl<K, V extends Identifiable<K>, R extend
     @Override
     public V create(V entity) throws EntityAlreadyExistsException, InvalidEntityDataException {
         try {
-            validator.validate(entity);
+            validator.validate(entity, false);
         } catch (ConstraintViolationException e) {
             throw new InvalidEntityDataException(
                     String.format("Error creating %s %s.",  entityName,validator.getUniqueStringIdentifier()), e);
@@ -55,7 +55,7 @@ public abstract class AbstractServiceImpl<K, V extends Identifiable<K>, R extend
     public V update(V entity) throws NonExistingEntityException, InvalidEntityDataException {
         load();
         try {
-            validator.validate(entity);
+            validator.validate(entity, true);
         } catch (ConstraintViolationException e) {
             throw new InvalidEntityDataException(
                     String.format("Error creating %s %s.",  entityName,validator.getUniqueStringIdentifier()), e);

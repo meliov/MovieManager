@@ -17,6 +17,7 @@ import java.util.*;
     public AbstractPersistableRepository(IdGenerator<K> idGenerator, String string ){
         this.idGenerator = idGenerator;
         this.entityName = string;
+
     }
 
     @Override

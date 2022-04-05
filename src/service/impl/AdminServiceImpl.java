@@ -12,10 +12,7 @@ import service.AdminService;
 import util.MovieValidator;
 import util.UserValidator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class AdminServiceImpl extends UserServiceIml implements AdminService {
     private DaoFactory daoFactory = new DaoFactoryImpl();
@@ -25,7 +22,7 @@ public class AdminServiceImpl extends UserServiceIml implements AdminService {
     private final ProgramRepository programRepository = daoFactory.createProgramRepository("program.db");
     private final HallRepository hallRepository = daoFactory.createHallRepository("hall.db");
     private final ReviewRepository reviewRepository = daoFactory.createReviewRepository("review.db");
-    private final RegisteredUserRepository registeredUserRepository = daoFactory.createRegisteredUserRepository("users.txt");
+    private final RegisteredUserRepository registeredUserRepository = daoFactory.createRegisteredUserRepository("users.db");
     private final MovieValidator movieValidator = new MovieValidator();
     public AdminServiceImpl(AdminRepository repository, UserValidator validator, DaoFactory daoFactory) {
         super(repository, validator);
@@ -86,7 +83,7 @@ public class AdminServiceImpl extends UserServiceIml implements AdminService {
     @Override
     public Movie addMovie(Admin admin, Movie movie) throws EntityAlreadyExistsException, ConstraintViolationException {
         movieRepository.load();
-        movieValidator.validate(movie);
+        movieValidator.validate(movie, false);
         admin.getMoviesModerated().add(movie);
         var addedMovie = movieRepository.create(movie);
         movieRepository.save();
@@ -95,19 +92,26 @@ public class AdminServiceImpl extends UserServiceIml implements AdminService {
 
     @Override
     public Movie updateMovie(Admin admin, Movie movie) throws NonExistingEntityException, ConstraintViolationException, InvalidEntityDataException {
+        repository.load();
         movieRepository.load();
         reviewRepository.load();
-        movieValidator.validate(movie);
+        projectionRepository.load();
+        programRepository.load();
+        hallRepository.load();
+        movieValidator.validate(movie, true);
+        ticketRepository.load();
         //update watched movie in user
         List<RegisteredUser> userList = new ArrayList<>(registeredUserRepository.findUsersByWatchedMovie(movie));
         for(RegisteredUser registeredUser: userList ){
-            registeredUser.getWatchedMovies().add(movie);//getWatchedMovies is a hashSet
+            registeredUser.getWatchedMovies().remove(movie);
+            registeredUser.getWatchedMovies().add(movie);
             update(registeredUser);
         }
         //update favourite in user
        userList = new ArrayList<>(registeredUserRepository.findUsersByFavouriteMovie(movie));
         for(RegisteredUser registeredUser: userList ){
-            registeredUser.getFavouriteMovies().add(movie);//getWatchedMovies is a hashSet
+            registeredUser.getFavouriteMovies().remove(movie);
+            registeredUser.getFavouriteMovies().add(movie);
             update(registeredUser);
         }
         //movie in reviews
@@ -115,20 +119,105 @@ public class AdminServiceImpl extends UserServiceIml implements AdminService {
         for(Review review: reviewsList){
             review.setMovie(movie);
             reviewRepository.update(review);
-            reviewRepository.save();
+
         }
         admin.getMoviesModerated().add(movie);
+        //movie in tickets
+        List<Ticket> ticketList = new ArrayList<>(ticketRepository.findTicketsByMovie(movie));
+        for (Ticket ticket: ticketList){
+            ticket.setMovie(movie);
+            ticketRepository.update(ticket);
+        }
         // movie in projection -> daily program -> hall
+        List<Projection> projectionList = new ArrayList<>(projectionRepository.findByMovie(movie));
+        for (Projection projection: projectionList){
+            projection.setMovie(movie);
 
-
+            for (DailyProgram dailyProgram: programRepository.findAll()){
+                if(dailyProgram.getProjections().contains(projection)){
+                   dailyProgram.getProjections().remove(projection);
+                    dailyProgram.getProjections().add(projection);
+                    for(Hall hall: hallRepository.findAll()){
+                        List<DailyProgram> hallProgram = Arrays.asList(hall.getMovieProgram());
+                        if(hallProgram.contains(dailyProgram)){
+                            hallProgram.set(hallProgram.indexOf(dailyProgram), dailyProgram);
+                            hall.setMovieProgram(hallProgram.toArray(DailyProgram[]::new));
+                            hallRepository.update(hall);
+                        }
+                    }
+                }
+            }
+        }
+        projectionRepository.save();//yes
+        programRepository.save();//yes
+        hallRepository.save();//yes
+        reviewRepository.save();//yes
+         ticketRepository.save();//yes
+         repository.save();//yes
         var updatedMovie = movieRepository.update(movie);
-        movieRepository.save();
+        movieRepository.save();//yes
         return updatedMovie;
     }
 
     @Override
-    public Movie deleteMovie(Admin admin, Movie movie) {
-        return null;
+    public Movie deleteMovie(Admin admin, Movie movie) throws InvalidEntityDataException {
+        repository.load();
+        movieRepository.load();
+        reviewRepository.load();
+        projectionRepository.load();
+        programRepository.load();
+        hallRepository.load();
+        ticketRepository.load();
+        //update watched movie in user
+        List<RegisteredUser> userList = new ArrayList<>(registeredUserRepository.findUsersByWatchedMovie(movie));
+        for(RegisteredUser registeredUser: userList ){
+            registeredUser.getWatchedMovies().remove(movie);
+            update(registeredUser);
+        }
+        //update favourite in user
+        userList = new ArrayList<>(registeredUserRepository.findUsersByFavouriteMovie(movie));
+        for(RegisteredUser registeredUser: userList ){
+            registeredUser.getFavouriteMovies().remove(movie);
+            update(registeredUser);
+        }
+        //movie in reviews
+        List<Review> reviewsList = new ArrayList<>(reviewRepository.findByMovie(movie));
+        for(Review review: reviewsList){
+            reviewRepository.deleteById(review.getId());
+
+        }
+        admin.getMoviesModerated().add(movie);
+        //movie in tickets
+        List<Ticket> ticketList = new ArrayList<>(ticketRepository.findTicketsByMovie(movie));
+        for (Ticket ticket: ticketList){
+            ticketRepository.deleteById(ticket.getId());
+        }
+        // movie in projection -> daily program -> hall
+        List<Projection> projectionList = new ArrayList<>(projectionRepository.findByMovie(movie));
+        for (Projection projection: projectionList){
+            projectionRepository.deleteById(projection.getId());
+
+            for (DailyProgram dailyProgram: programRepository.findAll()){
+                if(dailyProgram.getProjections().contains(projection)){
+                    dailyProgram.getProjections().remove(projection);
+                    for(Hall hall: hallRepository.findAll()){
+                        List<DailyProgram> hallProgram = Arrays.asList(hall.getMovieProgram());
+                        hallProgram.set(hallProgram.indexOf(dailyProgram), dailyProgram);
+                        hall.setMovieProgram(hallProgram.toArray(DailyProgram[]::new));
+                        hallRepository.update(hall);
+                    }
+                }
+            }
+        }
+        projectionRepository.save();//yes
+        programRepository.save();//yes
+        hallRepository.save();//yes
+        reviewRepository.save();//yes
+        ticketRepository.save();//yes
+        repository.save();//yes
+        var deletedMovie = movieRepository.deleteById(movie.getId());
+        movieRepository.save();//yes
+        return deletedMovie;
     }
 
     @Override

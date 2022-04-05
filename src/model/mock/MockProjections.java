@@ -21,6 +21,6 @@ public class MockProjections {
             new Projection( EIGHT, MOCK_MOVIES.get(3)),
             new Projection(NINE, MOCK_MOVIES.get(4)),
             new Projection(TEN, MOCK_MOVIES.get(2)),
-            new Projection( TWO, MOCK_MOVIES.get(2))
+            new Projection( TWO, MOCK_MOVIES.get(0))
     );
 }

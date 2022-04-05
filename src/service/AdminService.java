@@ -29,6 +29,6 @@ public interface AdminService  {
     Review addReview(Admin admin,Review review);
     Movie addMovie(Admin admin,Movie movie) throws EntityAlreadyExistsException, ConstraintViolationException;
     Movie updateMovie(Admin admin,Movie movie) throws NonExistingEntityException, ConstraintViolationException, InvalidEntityDataException;
-    Movie deleteMovie(Admin admin,Movie movie);
+    Movie deleteMovie(Admin admin,Movie movie) throws InvalidEntityDataException;
 
 }

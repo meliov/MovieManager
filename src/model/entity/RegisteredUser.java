@@ -4,6 +4,7 @@ import model.Role;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -11,8 +12,8 @@ import static model.Role.REGISTERED_USER;
 
 public class RegisteredUser extends User implements Serializable {
     private static final long serialVersionUID = 1L;
-    private Set<Movie> favouriteMovies;
-    private Set<Movie> watchedMovies;
+    private Set<Movie> favouriteMovies = new LinkedHashSet<>();
+    private Set<Movie> watchedMovies = new LinkedHashSet<>();
 
     public RegisteredUser(Integer id) {
         super(id);

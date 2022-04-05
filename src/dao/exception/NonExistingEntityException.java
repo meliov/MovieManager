@@ -1,6 +1,6 @@
 package dao.exception;
 
-public class NonExistingEntityException extends Exception {
+public class NonExistingEntityException extends RuntimeException {
     public NonExistingEntityException() {
     }
 

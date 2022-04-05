@@ -29,6 +29,7 @@ import java.util.stream.Collectors;
 
     @Override
     public Collection<Projection> findByMovie(Movie movie) throws NonExistingEntityException {
+        load();
         var movies = entityMap.values()
                 .stream()
                 .filter(e -> e.getMovie().equals(movie))
